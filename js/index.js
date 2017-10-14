@@ -24,6 +24,6 @@ function set_topics(error, keys, years) {
 
 
 d3.queue()
-  .defer(d3.csv, "../data/coll/keys.tsv")
-  .defer(d3.csv, "../data/coll/years.json")
+  .defer(d3.csv, "https://eight1911.github.io/page/data/coll/keys.tsv")
+  .defer(d3.csv, "https://eight1911.github.io/page/data/coll/years.json")
   .await(set_topics)
