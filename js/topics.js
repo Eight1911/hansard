@@ -5,15 +5,15 @@ function makegraph(item, years) {
     .style("width", "16vw")
     .style("height", "4em")
     .selectAll("rect")
-    .data((d) => d[3].map((x) => x/d3.max(d[3])))
+    .data((d) => d[3])
     .enter()
 
   svg
     .append("rect")
     .attr("width", "0.153em") // width / number of columns
-    .attr("height", (d) => 4*d + "em")
+    .attr("height", (d) => d + "em")
     .attr("x", (d, i) => i*0.153 + "vw")
-    .attr("y", (d) => (4 - 4*d) + "em")
+    .attr("y", (d) => (4 - d) + "em")
 
 
 }
