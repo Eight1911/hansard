@@ -1,34 +1,49 @@
 
+function makegraph(item, years) {
+  let svg = item
+    .append("svg")
+    .style("width", "16vw")
+    .style("height", "4em")
+    .style("background", "black")
+    .selectAll("rect")
+    .data((d) => [d[1]])
+
+
+}
+
 // add a topic line to a div with data already entered
-function makelines(table, keys) {
+function makelines(table, keys, years) {
   let lines = table
     .data(keys)
     .enter()
     .append("tr")
 
-  console.log(keys)
   lines
     .append("td")
     .text((i) => i[0])
 
 
-  lines
-    .append("td")
-    .text((i) => i[1].join(" "))
+
+  makegraph(lines.append("td"), years)
+
 
   lines
     .append("td")
-    .text((i) => i[2])
+    .text((i) => i[2].join(" "))
+
+  lines
+    .append("td")
+    .text((i) => Math.round(100000*i[1])/1000)
 
 
 }
 
 function maketable() {
   let data  = [
-    {"text": "topic id", "width": "10vw"},
-    {"text": "overtime", "width": "15vw"},
-    {"text": "base words", "width": "40vw"},
-    {"text": "proportion", "width": "25vw"},
+    {"text": "id", "width": "3vw"},
+    {"text": "overtime", "width": "17vw"},
+    {"text": "base words", "width": "58vw"},
+    {"text": "proportion", "width": "20vw"},
   ]
 
   let table = d3
@@ -36,7 +51,11 @@ function maketable() {
     .selectAll("table")
     .append("table")
 
-  table
+
+  header = table
+    .append('tr')
+
+  header
     .data(data)
     .enter()
     .append("th")
@@ -52,8 +71,7 @@ function callback(error, keys, years) {
   data['coll_years'] = years
   
   let table = maketable()
-      lines = makelines(table, keys)
-
+      lines = makelines(table, keys, years)
 }
 
 d3.queue()

@@ -10,7 +10,7 @@ html, body {
 }
 
 div, section, tr, td, th {
-  /**/ border: solid thin; /**/
+  /*/ border: solid thin; /**/
 }
 
 /* THE HEADER */
@@ -90,6 +90,23 @@ section.body {
   width: 100%;
   overflow: scroll;
 }
+table {
+  border-collapse:collapse;
+
+}
+td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+tr, th, td {
+  padding: 1em;
+  position:relative;
+  border-bottom: solid thin;
+}
+
+
+
 
 div.wrapper {
   font-weight: normal;
