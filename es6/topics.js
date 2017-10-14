@@ -268,6 +268,6 @@ function callback(error, keys) {
 
 
 d3.queue()
-  .defer(d3.json, "https://eight1911.github.io/page/data/coll/keys.json")
+  .defer(d3.json, "../data/coll/keys.json")
   //.defer(d3.json, "https://eight1911.github.io/page/data/coll/years.json")
   .await(callback)
