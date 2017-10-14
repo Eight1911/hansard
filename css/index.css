@@ -81,16 +81,35 @@ input.query#course {
 
 }
 
+/* LOADING ICONS */
+section.background {
+  z-index: -1;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: url("../img/loading.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+section.loading-text {
+  font-size: 300%;  
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1em 7em;
+  letter-spacing: 0.7em;
+  background: rgba(255, 255, 255, 0.7)
+}
+
+
 /* THE CONTENT */
-
-
 
 section.body {
   height: 100%;
   width: 100%;
   overflow: scroll;
-  background: url("../img/loading.gif");
-  background-position: center; 
 }
 table {
   border-collapse:collapse;
@@ -114,6 +133,7 @@ div.wrapper {
   font-weight: normal;
   overflow: scroll;
   padding: 6em 5%;
+  opacity: 0;
 }
 
 
