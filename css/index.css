@@ -89,6 +89,8 @@ section.body {
   height: 100%;
   width: 100%;
   overflow: scroll;
+  background: url("../img/loading.gif");
+  background-position: center; 
 }
 table {
   border-collapse:collapse;

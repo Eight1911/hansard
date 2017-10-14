@@ -17,7 +17,7 @@ function makegraph(item, years) {
     .attr("height", (d) => height*d + "em")
     .attr("x", (d, i) => i*colwidth + "vw")
     .attr("y", (d) => (height - height*d) + "em")
-    .attr("fill", "#00dddd")
+    .attr("fill", "#aaa")
 
 
 }
@@ -82,6 +82,8 @@ function callback(error, keys) {
   
   let table = maketable()
       lines = makelines(table, keys)
+
+  d3.select("section.body").style("background", "none")
 }
 
 d3.queue()
