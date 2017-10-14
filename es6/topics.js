@@ -260,7 +260,7 @@ function callback(error, keys) {
 
   d3.select("div.wrapper")
     .transition()
-    .delay(1000)
+    .delay(500)
     .style("transition", "1.5s")
     .style("opacity", "1")
 }
