@@ -1,0 +1,14 @@
+
+
+
+@font-face {
+  font-family: "Overpass";
+  font-weight: light;
+  src: url("../fonts/overpass/Overpass-Light.ttf");
+}
+
+@font-face {
+  font-family: "Overpass";
+  font-weight: thin;
+  src: url("../fonts/overpass/Overpass-Thin.ttf");
+}
