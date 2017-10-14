@@ -1,25 +1,30 @@
 
 function makegraph(item, years) {
-  let svg = item
+  let height = 3,
+      width  = 10,
+      colwidth = width / 104, // there are 104 years
+      svg = item
     .append("svg")
-    .style("width", "16vw")
-    .style("height", "4em")
+    .style("width", width +"vw")
+    .style("height", height + "em")
     .selectAll("rect")
     .data((d) => d[3])
     .enter()
 
   svg
     .append("rect")
-    .attr("width", "0.153em") // width / number of columns
-    .attr("height", (d) => d + "em")
-    .attr("x", (d, i) => i*0.153 + "vw")
-    .attr("y", (d) => (4 - d) + "em")
+    .attr("width", colwidth+ "em") // width / number of columns
+    .attr("height", (d) => height*d + "em")
+    .attr("x", (d, i) => i*colwidth + "vw")
+    .attr("y", (d) => (height - height*d) + "em")
+    .attr("fill", "#00dddd")
 
 
 }
 
 // add a topic line to a div with data already entered
 function makelines(table, keys, years) {
+  let percent = (i) => Math.round(i*100000)/1000 + "%"
   let lines = table
     .data(keys)
     .enter()
@@ -29,10 +34,7 @@ function makelines(table, keys, years) {
     .append("td")
     .text((i) => i[0])
 
-
-
   makegraph(lines.append("td"), years)
-
 
   lines
     .append("td")
@@ -40,16 +42,16 @@ function makelines(table, keys, years) {
 
   lines
     .append("td")
-    .text((i) => Math.round(100000*i[1])/1000)
+    .text((i) => percent(i[1]))
 
 
 }
 
 function maketable() {
   let data  = [
-    {"text": "ID", "width": "3vw"},
-    {"text": "over time", "width": "17vw"},
-    {"text": "base words", "width": "58vw"},
+    {"text": "ID", "width": "4vw" },
+    {"text": "over time", "width": "11vw"},
+    {"text": "base words", "width": "60vw"},
     {"text": "proportion", "width": "20vw"},
   ]
 
@@ -66,8 +68,9 @@ function maketable() {
     .data(data)
     .enter()
     .append("th")
-    .text((d, i) => d["text"])
-    .style("width", (d, i) => d["width"])
+    .text((d) => d["text"])
+    .attr("class", (d) => d["propotion"])
+    .style("width", (d) => d["width"])
 
   return table
 
