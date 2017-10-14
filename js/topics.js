@@ -4,9 +4,16 @@ function makegraph(item, years) {
     .append("svg")
     .style("width", "16vw")
     .style("height", "4em")
-    .style("background", "black")
     .selectAll("rect")
-    .data((d) => [d[1]])
+    .data((d) => d[3].map((x) => x/d3.max(d[3])))
+    .enter()
+
+  svg
+    .append("rect")
+    .attr("width", "0.153em") // width / number of columns
+    .attr("height", (d) => 4*d + "em")
+    .attr("x", (d, i) => i*0.153 + "vw")
+    .attr("y", (d) => (4 - 4*d) + "em")
 
 
 }
@@ -40,8 +47,8 @@ function makelines(table, keys, years) {
 
 function maketable() {
   let data  = [
-    {"text": "id", "width": "3vw"},
-    {"text": "overtime", "width": "17vw"},
+    {"text": "ID", "width": "3vw"},
+    {"text": "over time", "width": "17vw"},
     {"text": "base words", "width": "58vw"},
     {"text": "proportion", "width": "20vw"},
   ]
@@ -66,15 +73,15 @@ function maketable() {
 
 }
 
-function callback(error, keys, years) {
+function callback(error, keys) {
   data['coll_keys'] = keys
-  data['coll_years'] = years
+  //data['coll_years'] = years
   
   let table = maketable()
-      lines = makelines(table, keys, years)
+      lines = makelines(table, keys)
 }
 
 d3.queue()
   .defer(d3.json, "https://eight1911.github.io/page/data/coll/keys.json")
-  .defer(d3.json, "https://eight1911.github.io/page/data/coll/years.json")
+  //.defer(d3.json, "https://eight1911.github.io/page/data/coll/years.json")
   .await(callback)
