@@ -115,9 +115,9 @@ table {
   border-collapse:collapse;
 
 }
+
 td {
   vertical-align: middle;
-  text-align: center;
 }
 
 tr, th, td {
@@ -135,6 +135,7 @@ div.wrapper {
   padding: 6em 5%;
   opacity: 0;
 }
+
 
 
 /* INFORMATION IN LISTED TOPICS */
