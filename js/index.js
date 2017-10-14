@@ -154,7 +154,7 @@ function callback(error, keys) {
   d3.select("div.wrapper").transition().delay(500).style("transition", "1.5s").style("opacity", "1");
 }
 
-d3.queue().defer(d3.json, "../hansard/coll/keys.json")
+d3.queue().defer(d3.json, "https://eight1911.github.io/hansard/data/coll/keys.json")
 //.defer(d3.json, "https://eight1911.github.io/page/data/coll/years.json")
 .await(callback);
 
