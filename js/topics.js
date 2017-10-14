@@ -1,3 +1,6 @@
+const utriangle = "\u25BC",
+      dtriangle = "\u25B2"
+
 
 
 function compute_mean(keys) {
@@ -109,15 +112,32 @@ function initialize(keys) {
       .attr("class", "topic-content")
       .selectAll("div")
 
+    let toclass = (s) => "topic-top-row-" + s.split(" ").join("-")
+    let toelem  = (s) => `.${toclass(s)}`
+    let annotate = (text, asc) => `${text} ${asc?"\u25BC":"\u25B2"}`
+    let sorter = sort()
     header = table
       .append('tr')
+      .attr("class", "top-row")
       .data(data)
       .enter()
       .append("th")
       .text((d) => d["text"])
-      .attr("class", (d) => d["propotion"])
+      .attr("class", (d) => "topic-top-row " + toclass(d["text"]))
+      .attr("colspan", (d) => d["text"] === "proportion" ? "2" : "1")
+      .style("cursor", "pointer")
       .style("width", (d) => d["width"])
-      .attr("colspan", (d) => d["text"] == "proportion" ? "2" : "1")
+      .on("click", (d) => {
+        let[oldtext, ascend] = sorter(d["text"]),
+            newtext= annotate(d["text"], ascend)
+
+        console.log(oldtext, newtext, toelem(d['text']))
+
+        d3.select(toelem(oldtext))
+          .text(oldtext)
+        d3.select(toelem(d['text']))
+          .text(newtext)
+      })
 
     return table
   }
@@ -172,8 +192,6 @@ function update(keys) {
       .select("td.freqblock")
       .select("svg.freqblock")
       .select("rect")
-      .transition()
-      .duration(1500)
       .attr("width", (d) => (15*d[1]/maxprob) + "vw")
       .attr("x", (d) => (15 - 15*d[1]/maxprob) + "vw")
 
@@ -194,22 +212,37 @@ function update(keys) {
 }
 
 
-function sort(name, ascending) {
-  let means = data['means']
-  let comparison = ascending ? {
-    "ID":         (a, b) => a[0] - b[0],
-    "over time":  (a, b) => means[a[0]] - means[b[0]],
-    "base words": (a, b) => a[2][0].localeCompare(b[2][0]),
-    "proportion": (a, b) => a[1] - b[1]
-  } : {
-    "ID":         (a, b) => - (a[0] - b[0]),
-    "over time":  (a, b) => - (means[a[0]] - means[b[0]]),
-    "base words": (a, b) => - a[2][0].localeCompare(b[2][0]),
-    "proportion": (a, b) => - (a[1] - b[1])
+function sort() {
+
+  function sorter(name, ascending) {
+    let means = data['means']
+    let comparison = ascending ? {
+      "ID":         (a, b) => a[0] - b[0],
+      "over time":  (a, b) => means[a[0]] - means[b[0]],
+      "base words": (a, b) => a[2][0].localeCompare(b[2][0]),
+      "proportion": (a, b) => a[1] - b[1]
+    } : {
+      "ID":         (a, b) => - (a[0] - b[0]),
+      "over time":  (a, b) => - (means[a[0]] - means[b[0]]),
+      "base words": (a, b) => - a[2][0].localeCompare(b[2][0]),
+      "proportion": (a, b) => - (a[1] - b[1])
+    }
+
+    return update(data['coll_keys'].sort(comparison[name]))
   }
 
-  return update(data['coll_keys'].sort(comparison[name]))
+  function main(name) {
+    let oldtext = this.sort_last || "ID"
+    if (this.sort_last === name)
+      this.ascending = !this.ascending
+    else
+      this.sort_last = name,
+      this.ascending = false
+    sorter(this.sort_last, this.ascending)
+    return [oldtext, this.ascending]
+  }
 
+  return main // returns a function
 
 }
 
