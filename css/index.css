@@ -4,19 +4,20 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: "Overpass";
-  font-weight: light;
   min-width: 50em;
   width: 100%;
 
 }
 
-div, section {
-  /*/ border: solid thin; /**/
+div, section, tr, td, th {
+  /**/ border: solid thin; /**/
 }
 
 /* THE HEADER */
 
 section.head {
+  font-weight: thin;
+  z-index: 10;
   position: fixed;
 
   background: white;
@@ -82,25 +83,22 @@ input.query#course {
 
 /* THE CONTENT */
 
-div.wrapper {
-  overflow: scroll;
-  padding-top: 5em;
 
-}
-div.content {
-  float: right;
-  width: 50em;
-
-}
-
-/* the line in each topic */
-div.topic-line {
-  height: 2em;
-  padding: 0.5em;
-  border-top: solid thin #ddd;
-}
 
 section.body {
   height: 100%;
+  width: 100%;
   overflow: scroll;
 }
+
+div.wrapper {
+  font-weight: normal;
+  overflow: scroll;
+  padding: 6em 5%;
+}
+
+
+/* INFORMATION IN LISTED TOPICS */
+
+
+

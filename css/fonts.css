@@ -1,4 +1,8 @@
-
+@font-face {
+  font-family: "Overpass";
+  font-weight: normal;
+  src: url("../fonts/overpass/Overpass-Regular.ttf");
+}
 
 
 @font-face {
@@ -12,3 +16,4 @@
   font-weight: thin;
   src: url("../fonts/overpass/Overpass-Thin.ttf");
 }
+
