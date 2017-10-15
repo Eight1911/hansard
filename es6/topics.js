@@ -137,7 +137,7 @@
     }
 
     function main(keys) {
-      let table = maketable()
+      let table = maketable(),
           lines = makelines(table, keys)
     }
 
@@ -177,7 +177,7 @@
         .select("td.id")
         .text((i) => i[0])
 
-      // makegraph(lines)
+      makegraph(lines)
 
       lines
         .select("td.words")
