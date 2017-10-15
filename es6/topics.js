@@ -109,7 +109,7 @@
       let toelem  = (s) => `.${toclass(s)}`
       let annotate = (text, asc) => `${text} ${asc?"\u25BC":"\u25B2"}`
       let sorter = sort()
-      header = table
+      let header = table
         .append('tr')
         .attr("class", "top-row")
         .data(data)
