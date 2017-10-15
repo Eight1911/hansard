@@ -123,7 +123,7 @@ td {
 tr, th, td {
   padding: 1em;
   position:relative;
-  border-bottom: solid thin;
+  border-bottom: solid thin #aaa;
 }
 
 
