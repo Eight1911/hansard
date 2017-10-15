@@ -223,7 +223,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               return means[a[0]] - means[b[0]];
             },
             "base words": function baseWords(a, b) {
-              return a[2][0].localeCompare(b[2][0]);
+              return array_comp(a[2], b[2]);
             },
             "proportion": function proportion(a, b) {
               return a[1] - b[1];
@@ -236,7 +236,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               return -(means[a[0]] - means[b[0]]);
             },
             "base words": function baseWords(a, b) {
-              return -a[2].join("").localeCompare(b[2].join(""));
+              return -array_comp(a[2], b[2]);
             },
             "proportion": function proportion(a, b) {
               return -(a[1] - b[1]);
