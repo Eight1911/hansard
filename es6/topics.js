@@ -1,5 +1,21 @@
 (() => {
 
+  function array_comp(a, b) {
+    let min = d3.min(a.length, b.length)
+    for (let i = 0; i < min; ++i) {
+      if (a[i] > b[i])
+        return -1
+      else if (a[i] < b[i])
+        return 1
+    }
+    if (a.length > b.length)
+      return -1
+    else if (a.length === b.length)
+      return 0
+    else
+      return 1
+  }
+
   function compute_mean(keys) {
 
     function expectation(array) {
