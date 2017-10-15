@@ -226,7 +226,7 @@
         } : {
           "ID":         (a, b) => - (a[0] - b[0]),
           "over time":  (a, b) => - (means[a[0]] - means[b[0]]),
-          "base words": (a, b) => - a[2][0].localeCompare(b[2][0]),
+          "base words": (a, b) => - a[2].join("").localeCompare(b[2].join("")),
           "proportion": (a, b) => - (a[1] - b[1])
         }
 
