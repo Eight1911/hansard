@@ -1,3 +1,5 @@
+const utriangle = "\u25BC",
+      dtriangle = "\u25B2"
 
 
 const data = {
