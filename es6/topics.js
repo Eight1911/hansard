@@ -108,7 +108,7 @@
       let toclass = (s) => "topic-top-row-" + s.split(" ").join("-")
       let toelem  = (s) => `.${toclass(s)}`
       let annotate = (text, asc) => `${text} ${asc?"\u25BC":"\u25B2"}`
-      let sorter = sort()
+      let sorter = new Sorter
       let header = table
         .append('tr')
         .attr("class", "top-row")
@@ -122,7 +122,7 @@
         .style("cursor", "pointer")
         .style("width", d => d["width"])
         .on("click", d => {
-          let[oldtext, ascend] = sorter(d["text"]),
+          let[oldtext, ascend] = sorter.sort(d["text"]),
               newtext= annotate(d["text"], ascend)
 
           console.log(oldtext, newtext, toelem(d['text']))
@@ -206,41 +206,50 @@
 
   }
 
+  class Sorter {
+
+    constructor() {
+      this.sort_last = "ID"
+      this.ascending = true
+    }
 
 
-  function sort() {
+    sort(name) {
 
-    function sorter(name, ascending) {
-      let means = data['means']
-      let comparison = ascending ? {
-        "ID":         (a, b) => a[0] - b[0],
-        "over time":  (a, b) => means[a[0]] - means[b[0]],
-        "base words": (a, b) => a[2][0].localeCompare(b[2][0]),
-        "proportion": (a, b) => a[1] - b[1]
-      } : {
-        "ID":         (a, b) => - (a[0] - b[0]),
-        "over time":  (a, b) => - (means[a[0]] - means[b[0]]),
-        "base words": (a, b) => - a[2][0].localeCompare(b[2][0]),
-        "proportion": (a, b) => - (a[1] - b[1])
+      function sorter(name, ascending) {
+        let means = data['means']
+        let comparison = ascending ? {
+          "ID":         (a, b) => a[0] - b[0],
+          "over time":  (a, b) => means[a[0]] - means[b[0]],
+          "base words": (a, b) => a[2][0].localeCompare(b[2][0]),
+          "proportion": (a, b) => a[1] - b[1]
+        } : {
+          "ID":         (a, b) => - (a[0] - b[0]),
+          "over time":  (a, b) => - (means[a[0]] - means[b[0]]),
+          "base words": (a, b) => - a[2][0].localeCompare(b[2][0]),
+          "proportion": (a, b) => - (a[1] - b[1])
+        }
+
+        return update(data['coll_keys'].sort(comparison[name]))
       }
 
-      return update(data['coll_keys'].sort(comparison[name]))
-    }
+      function main(object, name) {
+        let oldtext = object.sort_last
+        if (object.sort_last === name)
+          object.ascending = !object.ascending
+        else
+          object.sort_last = name,
+          object.ascending = false
+        sorter(object.sort_last, object.ascending)
+        return [oldtext, object.ascending]
+      }
 
-    function main(name) {
-      let oldtext = this.sort_last || "ID"
-      if (this.sort_last === name)
-        this.ascending = !this.ascending
-      else
-        this.sort_last = name,
-        this.ascending = false
-      sorter(this.sort_last, this.ascending)
-      return [oldtext, this.ascending]
+      return main(this, name)
     }
-
-    return main // returns a function
 
   }
+
+
 
   function callback(error, keys) {
     data['coll_keys'] = keys

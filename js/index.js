@@ -9,7 +9,11 @@ var data = {
 };
 "use strict";
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 (function () {
 
@@ -97,7 +101,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
       var annotate = function annotate(text, asc) {
         return text + " " + (asc ? "\u25BC" : "\u25B2");
       };
-      var sorter = sort();
+      var sorter = new Sorter();
       var header = table.append('tr').attr("class", "top-row").data(data).enter().append("th").text(function (d) {
         return d["text"] === "ID" ? d["text"] + " \u25B2" : d["text"];
       }).text(function (d) {
@@ -109,10 +113,10 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
       }).style("cursor", "pointer").style("width", function (d) {
         return d["width"];
       }).on("click", function (d) {
-        var _sorter = sorter(d["text"]),
-            _sorter2 = _slicedToArray(_sorter, 2),
-            oldtext = _sorter2[0],
-            ascend = _sorter2[1],
+        var _sorter$sort = sorter.sort(d["text"]),
+            _sorter$sort2 = _slicedToArray(_sorter$sort, 2),
+            oldtext = _sorter$sort2[0],
+            ascend = _sorter$sort2[1],
             newtext = annotate(d["text"], ascend);
 
         console.log(oldtext, newtext, toelem(d['text']));
@@ -189,50 +193,64 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
     return main(keys);
   }
 
-  function sort() {
+  var Sorter = function () {
+    function Sorter() {
+      _classCallCheck(this, Sorter);
 
-    function sorter(name, ascending) {
-      var means = data['means'];
-      var comparison = ascending ? {
-        "ID": function ID(a, b) {
-          return a[0] - b[0];
-        },
-        "over time": function overTime(a, b) {
-          return means[a[0]] - means[b[0]];
-        },
-        "base words": function baseWords(a, b) {
-          return a[2][0].localeCompare(b[2][0]);
-        },
-        "proportion": function proportion(a, b) {
-          return a[1] - b[1];
-        }
-      } : {
-        "ID": function ID(a, b) {
-          return -(a[0] - b[0]);
-        },
-        "over time": function overTime(a, b) {
-          return -(means[a[0]] - means[b[0]]);
-        },
-        "base words": function baseWords(a, b) {
-          return -a[2][0].localeCompare(b[2][0]);
-        },
-        "proportion": function proportion(a, b) {
-          return -(a[1] - b[1]);
-        }
-      };
-
-      return update(data['coll_keys'].sort(comparison[name]));
+      this.sort_last = "ID";
+      this.ascending = true;
     }
 
-    function main(name) {
-      var oldtext = "sort_last" in this ? this.sort_last || "ID";
-      if (this.sort_last === name) this.ascending = !this.ascending;else this.sort_last = name, this.ascending = false;
-      sorter(this.sort_last, this.ascending);
-      return [oldtext, this.ascending];
-    }
+    _createClass(Sorter, [{
+      key: "sort",
+      value: function sort(name) {
 
-    return main; // returns a function
-  }
+        function sorter(name, ascending) {
+          var means = data['means'];
+          var comparison = ascending ? {
+            "ID": function ID(a, b) {
+              return a[0] - b[0];
+            },
+            "over time": function overTime(a, b) {
+              return means[a[0]] - means[b[0]];
+            },
+            "base words": function baseWords(a, b) {
+              return a[2][0].localeCompare(b[2][0]);
+            },
+            "proportion": function proportion(a, b) {
+              return a[1] - b[1];
+            }
+          } : {
+            "ID": function ID(a, b) {
+              return -(a[0] - b[0]);
+            },
+            "over time": function overTime(a, b) {
+              return -(means[a[0]] - means[b[0]]);
+            },
+            "base words": function baseWords(a, b) {
+              return -a[2][0].localeCompare(b[2][0]);
+            },
+            "proportion": function proportion(a, b) {
+              return -(a[1] - b[1]);
+            }
+          };
+
+          return update(data['coll_keys'].sort(comparison[name]));
+        }
+
+        function main(object, name) {
+          var oldtext = object.sort_last;
+          if (object.sort_last === name) object.ascending = !object.ascending;else object.sort_last = name, object.ascending = false;
+          sorter(object.sort_last, object.ascending);
+          return [oldtext, object.ascending];
+        }
+
+        return main(this, name);
+      }
+    }]);
+
+    return Sorter;
+  }();
 
   function callback(error, keys) {
     data['coll_keys'] = keys;
