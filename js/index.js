@@ -111,8 +111,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       };
       var sorter = new Sorter();
       var header = table.append('tr').attr("class", "top-row").data(data).enter().append("th").text(function (d) {
-        return d["text"] === "ID" ? d["text"] + " \u25B2" : d["text"];
-      }).text(function (d) {
         return d["text"] === "ID" ? d["text"] + " \u25BC" : d["text"];
       }).attr("class", function (d) {
         return "topic-top-row " + toclass(d["text"]);
@@ -126,8 +124,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             oldtext = _sorter$sort2[0],
             ascend = _sorter$sort2[1],
             newtext = annotate(d["text"], ascend);
-
-        console.log(oldtext, newtext, toelem(d['text']));
 
         d3.select(toelem(oldtext)).text(oldtext);
         d3.select(toelem(d['text'])).text(newtext);

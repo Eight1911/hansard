@@ -131,7 +131,6 @@
         .data(data)
         .enter()
         .append("th")
-        .text(d => d["text"] === "ID" ? d["text"] + " \u25B2": d["text"])
         .text(d => d["text"] === "ID" ? d["text"] + " \u25BC": d["text"])
         .attr("class", d => "topic-top-row " + toclass(d["text"]))
         .attr("colspan", d => d["text"] === "proportion" ? "2" : "1")
@@ -140,8 +139,6 @@
         .on("click", d => {
           let[oldtext, ascend] = sorter.sort(d["text"]),
               newtext= annotate(d["text"], ascend)
-
-          console.log(oldtext, newtext, toelem(d['text']))
 
           d3.select(toelem(oldtext))
             .text(oldtext)
