@@ -18,11 +18,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 (function () {
 
   function array_comp(a, b) {
-    var min = d3.min(a.length, b.length);
+
+    var min = Math.min(a.length, b.length);
     for (var i = 0; i < min; ++i) {
-      if (a[i] > b[i]) return -1;else if (a[i] < b[i]) return 1;
+      if (a[i] > b[i]) return 1;else if (a[i] < b[i]) return -1;
     }
-    if (a.length > b.length) return -1;else if (a.length === b.length) return 0;else return 1;
+    return a.length - b.length;
   }
 
   function compute_mean(keys) {
@@ -113,7 +114,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var header = table.append('tr').attr("class", "top-row").data(data).enter().append("th").text(function (d) {
         return d["text"] === "ID" ? d["text"] + " \u25BC" : d["text"];
       }).attr("class", function (d) {
-        return "topic-top-row " + toclass(d["text"]);
+        return toclass(d["text"]);
       }).attr("colspan", function (d) {
         return d["text"] === "proportion" ? "2" : "1";
       }).style("cursor", "pointer").style("width", function (d) {

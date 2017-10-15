@@ -1,3 +1,3 @@
 
 default:
-    babel --watch --minified es6 js/index.js --presets=es2015 
+    babel --watch es6 --out-file js/index.js --presets=es2015 

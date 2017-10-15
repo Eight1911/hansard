@@ -1,20 +1,17 @@
 (() => {
 
   function array_comp(a, b) {
-    let min = d3.min(a.length, b.length)
+
+    let min = Math.min(a.length, b.length)
     for (let i = 0; i < min; ++i) {
       if (a[i] > b[i])
-        return -1
-      else if (a[i] < b[i])
         return 1
+      else if (a[i] < b[i])
+        return -1
     }
-    if (a.length > b.length)
-      return -1
-    else if (a.length === b.length)
-      return 0
-    else
-      return 1
+    return a.length - b.length
   }
+
 
   function compute_mean(keys) {
 
@@ -132,7 +129,7 @@
         .enter()
         .append("th")
         .text(d => d["text"] === "ID" ? d["text"] + " \u25BC": d["text"])
-        .attr("class", d => "topic-top-row " + toclass(d["text"]))
+        .attr("class", d => toclass(d["text"]))
         .attr("colspan", d => d["text"] === "proportion" ? "2" : "1")
         .style("cursor", "pointer")
         .style("width", d => d["width"])
@@ -234,12 +231,12 @@
         let comparison = ascending ? {
           "ID":         (a, b) => a[0] - b[0],
           "over time":  (a, b) => means[a[0]] - means[b[0]],
-          "base words": (a, b) => array_comp(a[2],b[2]),
+          "base words": (a, b) => array_comp(a[2], b[2]),
           "proportion": (a, b) => a[1] - b[1]
         } : {
           "ID":         (a, b) => - (a[0] - b[0]),
           "over time":  (a, b) => - (means[a[0]] - means[b[0]]),
-          "base words": (a, b) => - array_comp(a[2],b[2]),
+          "base words": (a, b) => - array_comp(a[2], b[2]),
           "proportion": (a, b) => - (a[1] - b[1])
         }
 
