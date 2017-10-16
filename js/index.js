@@ -37,7 +37,9 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
           width = 10,
           colwidth = width / 104,
           // there are 104 years
-      svg = td.append("svg").attr("class", "topic-graph").style("width", width + "vw").style("height", height + "em").style("text-align", "center").selectAll("rect").data(function (d) {
+      svg = td.append("svg").attr("class", "topic-graph").style("width", width + "vw").style("height", height + "em").style("text-align", "center").selectAll("rect").attr("topic-num", function (d) {
+        return d[0];
+      }).data(function (d) {
         return d[3];
       }).enter();
 
@@ -49,6 +51,18 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
       }).attr("y", function (d) {
         return height - height * d + "em";
       }).attr("fill", "#aaa");
+
+      // generate_pngs(td)
+    }
+
+    function generate_pngs(td) {
+      td.selectAll("svg.topic-graph").each(function (d, i) {
+        context.drawImage(image, 0, 0);
+        var a = document.createElement("a");
+        a.download = i + ".png";
+        a.href = canvas.toDataURL("image/png");
+        a.click();
+      });
     }
 
     // add a topic line to a div with data already entered

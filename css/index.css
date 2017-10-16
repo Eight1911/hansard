@@ -91,7 +91,7 @@ div.top-bar {
 
 }
 
-input.search {
+input.fuzzy-search {
   font-family: "Overpass";
   font-weight: light;
   outline: none;

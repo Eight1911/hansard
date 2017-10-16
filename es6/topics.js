@@ -30,6 +30,7 @@
           .style("height", height + "em")
           .style("text-align", "center")
         .selectAll("rect")
+        .attr("topic-num", d => d[0])
         .data(d => d[3])
         .enter()
 
@@ -40,6 +41,21 @@
           .attr("x", (d, i) => i*colwidth + "vw")
           .attr("y", d => (height - height*d) + "em")
           .attr("fill", "#aaa")
+
+      // generate_pngs(td)
+    }
+
+    function generate_pngs(td) {
+      td
+        .selectAll("svg.topic-graph")
+        .each((d, i) => {
+          context.drawImage(image, 0, 0);
+          var a = document.createElement("a");
+          a.download = `${i}.png`;
+          a.href = canvas.toDataURL("image/png");
+          a.click();
+        })
+
     }
 
     // add a topic line to a div with data already entered
