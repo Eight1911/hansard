@@ -5,14 +5,10 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/index.css">
   <link rel="icon" type="image/png" href="img/out.png">
-
-
-
 </head>
 
 
 <body>
-  <div hidden=true>▼▲&#x25bc;&#x25b2;</div>
   <section class="background">
     <section class="loading-text"> LOADING  </section>
   </section>
@@ -22,9 +18,12 @@
     <div class="title"> THE BRITISH HANSARD </div>
   </section>
 
-  <section class="body">
-    <div class="wrapper">
-
+  <section class="body" id="outer-topic-wrapper">
+    <div class="top-bar">
+      <input class="search" placeholder="search" /></p>
+    </div>
+    <div class="topic-wrapper">
+      <!-- FOR JS -->
     </div>
   </section>
 
@@ -34,5 +33,6 @@
 
   <!-- MAIN SCRIPTS -->
   <script src="js/d3.v4.min.js"></script>
+  <script src="js/list.js"></script>
   <script src="js/index.js"></script>
 </html5>

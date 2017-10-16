@@ -17,7 +17,7 @@ div, section, tr, td, th {
 
 section.head {
   font-weight: thin;
-  z-index: 10;
+  z-index: 1;
   position: fixed;
 
   background: white;
@@ -55,31 +55,6 @@ section.head > div.title {
 
 }
 
-section.head > input.query {
-  font-family: "Overpass";
-  font-weight: light;
-  display: inline-block;
-  position: absolute;
-  top: 47%;
-  outline: none;
-  padding: 0 0.3em;
-  font-size: 150%;
-  display: inline-block;
-  border: none;
-  border-bottom: solid thin #ddd;
-
-}
-
-input.query#search { 
-  width: 30%; 
-  transform: translate(19.5em, -50%);
-}
-input.query#course { 
-  width: 6.5em;
-  text-align: right; 
-  transform: translate(12em, -50%);
-
-}
 
 /* LOADING ICONS */
 section.background {
@@ -104,10 +79,34 @@ section.loading-text {
 }
 
 
+/* THE TOP BAR */
+
+div.top-bar {
+  text-align: right;
+  padding: 1em 5em;
+  top: 0;
+  right: 0;
+  position: fixed;
+  z-index: 3;
+
+}
+
+input.search {
+  font-family: "Overpass";
+  font-weight: light;
+  outline: none;
+  display: inline-block;
+  padding: 0 0.3em;
+  font-size: 150%;
+  border: none;
+  border-bottom: solid thin #ddd;
+}
+
+
 /* THE CONTENT */
 
 section.body {
-  height: 100%;
+  padding: 6em 0;
   width: 100%;
   overflow: scroll;
 }
@@ -127,18 +126,16 @@ tr, th, td {
 }
 
 
-
-
-div.wrapper {
+div.topic-wrapper {
+  padding: 0 5%;
   font-weight: normal;
   overflow: scroll;
-  padding: 6em 5%;
   opacity: 0;
 }
 
 
-
 /* INFORMATION IN LISTED TOPICS */
 
-
-
+th.topic-header {
+  cursor: pointer;
+}
