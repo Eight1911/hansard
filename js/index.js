@@ -37,31 +37,42 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
           width = 10,
           colwidth = width / 104,
           // there are 104 years
-      svg = td.append("svg").attr("class", "topic-graph").style("width", width + "vw").style("height", height + "em").style("text-align", "center").selectAll("rect").attr("topic-num", function (d) {
+      svg = td.append("svg").attr("class", "topic-graph").style("width", 100 * width + "em").style("height", 100 * height + "em").style("text-align", "center").selectAll("rect").attr("topic-num", function (d) {
         return d[0];
       }).data(function (d) {
         return d[3];
       }).enter();
 
-      svg.append("rect").attr("width", colwidth + "em") // width / number of columns
+      svg.append("rect").attr("width", 100 * colwidth + "em") // width / number of columns
       .attr("height", function (d) {
-        return height * d + "em";
+        return 100 * height * d + "em";
       }).attr("x", function (d, i) {
-        return i * colwidth + "vw";
+        return 100 * i * colwidth + "em";
       }).attr("y", function (d) {
-        return height - height * d + "em";
+        return 100 * (height - height * d) + "em";
       }).attr("fill", "#aaa");
 
-      // generate_pngs(td)
+      generate_pngs(td);
     }
 
     function generate_pngs(td) {
+      var counter = 0;
       td.selectAll("svg.topic-graph").each(function (d, i) {
-        context.drawImage(image, 0, 0);
-        var a = document.createElement("a");
-        a.download = i + ".png";
-        a.href = canvas.toDataURL("image/png");
-        a.click();
+        console.log(d);
+        var serializer = new XMLSerializer();
+        var source = serializer.serializeToString(this);
+        //add name spaces.
+        if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
+          source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+        }
+        if (!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)) {
+          source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
+        }
+        //add xml declaration
+        source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+        setTimeout(function () {
+          saveAs(new Blob([source]), "graph-" + d[0] + ".svg");
+        }, 100 * d[0]);
       });
     }
 

@@ -26,8 +26,8 @@
           svg = td
         .append("svg")
           .attr("class", "topic-graph")
-          .style("width", width +"vw")
-          .style("height", height + "em")
+          .style("width", 100*width +"em")
+          .style("height", 100*height + "em")
           .style("text-align", "center")
         .selectAll("rect")
         .attr("topic-num", d => d[0])
@@ -36,24 +36,34 @@
 
       svg
         .append("rect")
-          .attr("width", colwidth + "em") // width / number of columns
-          .attr("height", d => height*d + "em")
-          .attr("x", (d, i) => i*colwidth + "vw")
-          .attr("y", d => (height - height*d) + "em")
+          .attr("width", 100*colwidth + "em") // width / number of columns
+          .attr("height", d => 100*height*d + "em")
+          .attr("x", (d, i) => 100*i*colwidth + "em")
+          .attr("y", d => 100*(height - height*d) + "em")
           .attr("fill", "#aaa")
 
-      // generate_pngs(td)
+      generate_pngs(td)
     }
 
     function generate_pngs(td) {
+      let counter = 0
       td
         .selectAll("svg.topic-graph")
-        .each((d, i) => {
-          context.drawImage(image, 0, 0);
-          var a = document.createElement("a");
-          a.download = `${i}.png`;
-          a.href = canvas.toDataURL("image/png");
-          a.click();
+        .each(function (d, i) {
+          console.log(d)
+          var serializer = new XMLSerializer();
+          var source = serializer.serializeToString(this);
+          //add name spaces.
+          if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
+              source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+          }
+          if(!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)){
+              source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
+          }
+          //add xml declaration
+          source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+          setTimeout(function() { saveAs(new Blob([source]), `graph-${d[0]}.svg`)} , 100 * d[0])
+
         })
 
     }
@@ -162,7 +172,7 @@
   }
 
   function callback(error, keys) {
-    data.coll_keys = keys
+    data.coll_keys = keys 
     compute_mean(keys)
     initialize(keys)
 
