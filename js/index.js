@@ -30,31 +30,34 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
   function initialize(keys) {
 
+    // not call unless the user 
+    // wants the svg generated
     function makegraph(item) {
       var td = item.append("td");
 
-      var height = 3,
-          width = 10,
+      var height = 30,
+          width = 100,
           colwidth = width / 104,
           // there are 104 years
-      svg = td.append("svg").attr("class", "topic-graph").style("width", 100 * width + "em").style("height", 100 * height + "em").style("text-align", "center").selectAll("rect").attr("topic-num", function (d) {
+      svg = td.append("svg").attr("class", "topic-graph").style("width", width + "em").style("height", height + "em").style("text-align", "center").selectAll("rect").attr("topic-num", function (d) {
         return d[0];
       }).data(function (d) {
         return d[3];
       }).enter();
 
-      svg.append("rect").attr("width", 100 * colwidth + "em") // width / number of columns
+      svg.append("rect").attr("width", colwidth + "em") // width / number of columns
       .attr("height", function (d) {
-        return 100 * height * d + "em";
+        return height * d + "em";
       }).attr("x", function (d, i) {
-        return 100 * i * colwidth + "em";
+        return i * colwidth + "em";
       }).attr("y", function (d) {
-        return 100 * (height - height * d) + "em";
+        return height - height * d + "em";
       }).attr("fill", "#aaa");
 
       generate_pngs(td);
     }
 
+    // save files to pngs
     function generate_pngs(td) {
       var counter = 0;
       td.selectAll("svg.topic-graph").each(function (d, i) {
@@ -72,7 +75,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
         setTimeout(function () {
           saveAs(new Blob([source]), "graph-" + d[0] + ".svg");
-        }, 100 * d[0]);
+        }, 50 * d[0]);
       });
     }
 
@@ -91,7 +94,13 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         return d[0];
       });
 
-      makegraph(lines);
+      //makegraph(lines)
+      /**/
+      lines.append("td").attr("class", "topic-graph").append("img").attr("src", function (d) {
+        return "img/topic-graph-png/graph-" + d[0] + ".png";
+      }).style("width", "10vw").style("height", "3em");
+      /**/
+
       // this is for sorting with list.js only
       lines.append("td").attr("class", "topic-overtime").text(function (d) {
         return percent(d[4]);

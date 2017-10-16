@@ -125,6 +125,10 @@ tr, th, td {
   border-bottom: solid thin #ddd;
 }
 
+td.topic-graph {
+  text-align: center;
+}
+
 
 div.topic-wrapper {
   padding: 0 5%;
