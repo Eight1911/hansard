@@ -83,7 +83,7 @@ section.loading-text {
 
 div.top-bar {
   text-align: right;
-  padding: 1em 5em;
+  padding: 1em;
   top: 0;
   right: 0;
   position: fixed;
@@ -91,17 +91,18 @@ div.top-bar {
 
 }
 
-input.fuzzy-search {
+input.fuzzy-search, input.search {
   font-family: "Overpass";
   font-weight: light;
   outline: none;
   display: inline-block;
   padding: 0 0.3em;
+  margin: 0 1em;
   font-size: 150%;
+  width: 15vw;
   border: none;
   border-bottom: solid thin #ddd;
 }
-
 
 /* THE CONTENT */
 
