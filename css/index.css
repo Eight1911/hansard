@@ -1,4 +1,9 @@
-
+::selection {
+  background: #ddd; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #ddd; /* Gecko Browsers */
+}
 
 html, body {
   margin: 0;
