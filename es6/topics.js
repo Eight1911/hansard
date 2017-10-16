@@ -99,15 +99,6 @@
           .style("height", "3em")
       /**/
 
-
-      // this is for sorting with list.js only
-      lines
-        .append("td")
-          .attr("class", "topic-overtime")
-          .text(d => percent(d[4]))
-          .style("display", "none")
-
-
       lines
         .append("td")
           .attr("class", "topic-basewords")
@@ -132,11 +123,26 @@
 
       lines
         .append("td")
-          .attr("class", "topic-proportion")
+          .attr("class", "topic-percent")
           .text(d => percent(d[1]))
           .style("width", "5vw")
           .style("text-align", "left")
           .style("width")
+      
+
+      // this is for sorting with list.js only
+      lines
+        .append("td")
+          .attr("class", "topic-overtime")
+          .text(d => 10000 * d[4]) // times 10000 to make integer sort correctly
+          .style("display", "none")
+
+      lines
+        .append("td")
+          .attr("class", "topic-proportion")
+          .text(d => 10000 * d[1])
+          .style("display", "none")
+
 
     }
 

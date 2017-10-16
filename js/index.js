@@ -101,11 +101,6 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
       }).style("width", "10vw").style("height", "3em");
       /**/
 
-      // this is for sorting with list.js only
-      lines.append("td").attr("class", "topic-overtime").text(function (d) {
-        return percent(d[4]);
-      }).style("display", "none");
-
       lines.append("td").attr("class", "topic-basewords").text(function (d) {
         return d[2].join(" ");
       }).style("text-align", "left");
@@ -116,9 +111,19 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         return 15 - 15 * d[1] / maxprop + "vw";
       }).attr("fill", "#aaa");
 
-      lines.append("td").attr("class", "topic-proportion").text(function (d) {
+      lines.append("td").attr("class", "topic-percent").text(function (d) {
         return percent(d[1]);
       }).style("width", "5vw").style("text-align", "left").style("width");
+
+      // this is for sorting with list.js only
+      lines.append("td").attr("class", "topic-overtime").text(function (d) {
+        return 10000 * d[4];
+      }) // times 10000 to make integer sort correctly
+      .style("display", "none");
+
+      lines.append("td").attr("class", "topic-proportion").text(function (d) {
+        return 10000 * d[1];
+      }).style("display", "none");
     }
 
     function maketable() {
