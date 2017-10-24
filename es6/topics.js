@@ -15,9 +15,9 @@
 
 
   function initialize(keys) {
-
-    // not call unless the user 
-    // wants the svg generated
+    /*
+    // not called unless the user 
+    // wants the svgs generated
     function makegraph(item) {
       let td = item
         .append("td")
@@ -70,6 +70,7 @@
         })
 
     }
+    */
 
     // add a topic line to a div with data already entered
     function makelines(tbody, keys) {
