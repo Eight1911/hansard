@@ -12,15 +12,12 @@ json
 │   ├── sigma   : sigma of convolution (float)
 │   └── prop_t  : percentage in each topics (array) # not available yet
 ├── documents (object)
-│   ├── sigma of convolution (float)
 │   ├── name and id and year
 │   └── percentage in each topics # (600mb large, so doubtful)
 └── years (array)
-    ├── docvec : composition by topics by docs (array)
-    ├── wordvec : composition by topics by words (array)
-    ├── docs: names and length (array)
-    │   ├── name
-    │   ├── len
-    │   └── link
-    ├── wordnum : num words
-    └── docnum : num docs
+    ├── total number of documents
+    ├── composition by topics (array)
+    ├── document names (array)
+    └── document links (array) # not available yet
+
+
