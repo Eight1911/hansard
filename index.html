@@ -2,45 +2,23 @@
 <html lang="en">
 <head>
   <title>The British Hansard</title>
-  <link rel="stylesheet" href="css/fonts.css">
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="icon" type="image/png" href="img/out.png">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="icon" type="image/png" href="data/img/out.png">
 </head>
 
 
 <body>
-  <section class="background">
-    <section class="loading-text"> LOADING  </section>
-  </section>
+  <section class="head"><a href="/#/">
+      <h class="title"> THE BRITISH HANSARD </h>
+  </a></section>
 
-  <section class="head">
-    <div class="circle"></div>
-    <div class="title"> THE BRITISH HANSARD </div>
-  </section>
-
-  <section class="body" id="outer-topic-wrapper">
-    <div class="top-bar">
-      <input class="fuzzy-search" placeholder="fuzzy search" />
-      <input class="search" placeholder="search" />
-    </div>
-    <div class="topic-wrapper">
-      <!-- FOR JS -->
-    </div>
-  </section>
-
-  <section class="info">
-    <div class="one-topic-year">
-      <!-- FOR JS -->
-    </div>
-  </section>
-
-
+  <section id="body" class="body"></section>
 </body>
 
-
-  <!-- MAIN SCRIPTS -->
-  <script src="js/d3.v4.min.js"></script>
   <!--script src="js/file-saver.js"></script-->
+  <script src="js/d3.v4.min.js"></script>
+  <script src="js/navigo.js"></script>
   <script src="js/list.js"></script>
   <script src="js/index.js"></script>
 </html5>

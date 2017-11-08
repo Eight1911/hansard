@@ -3,21 +3,27 @@
 json
 ├── range (object) : { start:startyear, end:endyear }
 ├── topics (array) of
-│   ├── pvec    : proportions of topic over years (array)
-│   ├── words   : important words (array)
+│   ├── words : important words (array)
+│   │   ├── word : the word
+│   │   └── prop : proportion of topic
 │   ├── docs    : most significant documents (whatever this means)
-│   └── prop    : collective proportion (float)
+│   │   ├── prop : topic proportion
+│   │   └── id
+│   ├── prop    : collective proportion (float)
+│   ├── wordvec : proportions of topic by years by words (array) // maybe calculated on the fly
+│   └── docvec  : proportions of topic by years by docs (array) // maybe calculated on the fly
 ├── words (word -> object)
 │   ├── pvec    : proportions of the word over years (array)
 │   ├── sigma   : sigma of convolution (float)
 │   └── prop_t  : percentage in each topics (array) # not available yet
 ├── documents (object)
-│   ├── name and id and year
+│   ├── name and id and year and date
 │   └── percentage in each topics # (600mb large, so doubtful)
 └── years (array)
-    ├── total number of documents
-    ├── composition by topics (array)
-    ├── document names (array)
-    └── document links (array) # not available yet
+    ├── docs by id
+    ├── numdocs by year (array)
+    ├── numwords by year (array)
+    ├── composition by topics by words (array) // used to calculate the ones to topic
+    └── composition by topics by documents (array)
 
 
