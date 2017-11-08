@@ -1,0 +1,21 @@
+
+
+div.word-graph {
+    position: fixed;
+    width:  80vw;
+    top: 8vh;
+    height:  92vh;
+    background: gray;
+    padding-top: 10vw;
+}
+
+div.right {
+    position: absolute;
+    right: 0vw;
+    width: 20vw;
+    top:  8vh;
+}
+
+div.select-word {
+
+}

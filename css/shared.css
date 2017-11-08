@@ -21,6 +21,8 @@ section.head {
 
 }
 
+
+
 section.head a {
   color: #eee;
 }
@@ -41,6 +43,7 @@ h.title {
 section.body#body {
   position: absolute;
   padding-top: 8vh;
+  width: 100%;
 }
 
 div.sort:hover {
@@ -56,3 +59,5 @@ div.sort {
   padding-bottom: 2vw;
   margin-bottom: -0.1vw;
 }
+
+

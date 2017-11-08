@@ -475,25 +475,60 @@ function topic(_ref, query) {
 
   return main(id);
 }
-'use strict';
+"use strict";
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 function word(_, querystr) {
 
-    function buildgraph(body) {}
+  function buildgraph(body) {
 
-    function addword(graph, word) {}
+    var graph = body.append("div").attr("class", "word-graph");
+    var selword = body.append("div").attr("class", "right");
+    return [graph, selword];
 
-    function main() {
-        util.setcss('word');
-        var body = util.clearbody();
-        var query = util.parseuri(querystr);
-        var words = query.words;
-        var graph = buildgraph(body);
+    return main(body);
+  }
 
-        if (words instanceof Array) addword(body, word);
-    }
+  function addwords(graph, word) {
+    var _maindata$range = _slicedToArray(maindata.range, 2),
+        start = _maindata$range[0],
+        stop = _maindata$range[1];
 
-    return main();
+    var range = util.range(start, stop);
+    var data = maindata.word[word];
+    var axis = d2b.chartAxis();
+    console.log(data);
+    console.log(range.map(function (x, i) {
+      return { x: x, y: data[i] };
+    }));
+    console.log(data);
+    graph.datum({
+      sets: [{
+        generators: [d2b.svgLine(), d2b.svgScatter()],
+        graphs: [{ label: word, values: range.map(function (x, i) {
+            return { x: i, y: data[i] };
+          }) }]
+      }]
+    }).call(axis);
+  }
+  function main() {
+    util.setcss('word');
+    var body = util.clearbody();
+    var query = util.parseuri(querystr);
+    var words = query.word;
+
+    var _buildgraph = buildgraph(body),
+        _buildgraph2 = _slicedToArray(_buildgraph, 2),
+        svg = _buildgraph2[0],
+        selword = _buildgraph2[1];
+
+    console.log(words);
+
+    addwords(svg, words);
+  }
+
+  return main();
 }
 "use strict";
 
