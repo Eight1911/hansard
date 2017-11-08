@@ -50,7 +50,7 @@ function home() {
         .data(d => d.words)
         .enter()
         .append('a')
-        .attr('href', d => `#/word/?word=${d.word}`)
+        .attr('href', d => `#/word/?word[]=${d.word}`)
         .text(d => d.word)
 
     }

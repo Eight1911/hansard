@@ -145,7 +145,7 @@ function home() {
       var data = row.append("div").attr("class", "topic-word").selectAll('a').data(function (d) {
         return d.words;
       }).enter().append('a').attr('href', function (d) {
-        return "#/word/?word=" + d.word;
+        return "#/word/?word[]=" + d.word;
       }).text(function (d) {
         return d.word;
       });
@@ -321,7 +321,7 @@ function topic(_ref, query) {
 
       function main(body, topic) {
         var divword = body.append("div").attr("class", "left").selectAll("div").data(topic.words).enter().append("a").attr("href", function (d) {
-          return "#/word/?word=" + d.word;
+          return "#/word/?word[]=" + d.word;
         }).append("div").attr("class", "word");
 
         push(divword, topic.words);

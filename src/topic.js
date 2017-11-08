@@ -34,7 +34,7 @@ function topic({id}, query) {
           .data(topic.words)
           .enter()
           .append("a")
-          .attr("href", d => `#/word/?word=${d.word}`)
+          .attr("href", d => `#/word/?word[]=${d.word}`)
           .append("div")
           .attr("class", "word")
 
