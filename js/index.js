@@ -46,7 +46,6 @@ var util = function () {
   }
 
   function print(item) {
-    console.log(item);
     return item;
   }
 
@@ -490,28 +489,35 @@ function word(_, querystr) {
     return main(body);
   }
 
-  function addwords(graph, word) {
+  function addwords(graph, words) {
     var _maindata$range = _slicedToArray(maindata.range, 2),
         start = _maindata$range[0],
         stop = _maindata$range[1];
 
     var range = util.range(start, stop);
-    var data = maindata.word[word];
-    var axis = d2b.chartAxis();
-    console.log(data);
-    console.log(range.map(function (x, i) {
-      return { x: x, y: data[i] };
-    }));
-    console.log(data);
-    graph.datum({
-      sets: [{
-        generators: [d2b.svgLine(), d2b.svgScatter()],
-        graphs: [{ label: word, values: range.map(function (x, i) {
-            return { x: i, y: data[i] };
-          }) }]
-      }]
-    }).call(axis);
+
+    function zip_xy(a, b) {
+      return a.map(function (item, ind) {
+        return { x: item, y: b[ind] };
+      });
+    }
+
+    function grapher(word) {
+      return { label: word, values: zip_xy(range, maindata.word[word]) };
+    }
+
+    function main(graph, words) {
+      var axis = d2b.chartAxis();
+      var generators = [d2b.svgLine(), d2b.svgScatter()];
+      var graphs = words.map(grapher);
+      var sets = [{ generators: generators, graphs: graphs }];
+      console.log(graphs);
+      return graph.datum({ sets: sets }).call(axis);
+    }
+
+    return main(graph, words);
   }
+
   function main() {
     util.setcss('word');
     var body = util.clearbody();
@@ -523,9 +529,11 @@ function word(_, querystr) {
         svg = _buildgraph2[0],
         selword = _buildgraph2[1];
 
-    console.log(words);
+    console.log("Word", words[0], query.word);
 
-    addwords(svg, words);
+    setTimeout(function () {
+      return addwords(svg, words);
+    }, 100);
   }
 
   return main();

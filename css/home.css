@@ -1,5 +1,4 @@
 
-
 a {
   overflow:  hidden;
   text-decoration: none;
@@ -37,6 +36,7 @@ input.fuzzy-search { right: 33.5vh; }
 
 
 div.row-head { border-bottom: solid medium green; }
+
 div.row-head-prop,
 div.row-head-id,
 div.row-head-freq,
@@ -44,8 +44,6 @@ div.row-head-word {
   text-align: center; 
   cursor: pointer;
 }
-
-
 
 div.topic-row, div.row-head {
   width:  90vw;
@@ -58,36 +56,35 @@ div.topic-row { padding:  2vw 0; }
 
 div.row-head-id,
 div.topic-row div.topic-id {
-  position: relative;
+  display: inline-block;
   text-align: center;
-  width: 5vw;
-  padding-right: 2vw;
+  width: 6vw;
 }
 
 div.row-head-freq,
 div.topic-row img.topic-freq {
-  width: 13vw;
+  width: 14vw;
   object-fit: contain;
 }
 
-div.row-head-word,
+div.row-head-word { width: 55vw; }
 div.topic-row div.topic-word {
-  line-height: 150%;
   width: 50vw;
   object-fit: contain;
-  padding: 0 3vw;
+  padding: 0 2.5vw;
 }
 
-div.row-head-prop { width: 18vw; }
+div.row-head-prop { width: 15vw; }
 div.topic-row div.topic-prop {
   text-align: right;
-  width:  3vw;
-  padding: 0 1vw;
+  width:  4vw;
+  padding: 0 0 0 1vw;
 }
 
 div.topic-row div.topic-bar {
-  width: 8vw;
+  width: 7vw;
   float: right;
+  padding: 1vw;
 }
 
 

@@ -1,21 +1,18 @@
 
 
 div.word-graph {
-    position: fixed;
-    width:  80vw;
+    position: absolute;
+    width:  60vw;
+    padding: 5vh 5vw;
     top: 8vh;
-    height:  92vh;
-    background: gray;
-    padding-top: 10vw;
+    height:  70vh;
 }
 
 div.right {
     position: absolute;
     right: 0vw;
-    width: 20vw;
+    width: 25vw;
+    height:  92vh;
     top:  8vh;
-}
-
-div.select-word {
-
+    border: solid thin;
 }

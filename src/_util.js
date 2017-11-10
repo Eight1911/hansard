@@ -47,7 +47,6 @@ const util = (() => {
   }
 
   function print(item) {
-    console.log(item)
     return item
   }
 
