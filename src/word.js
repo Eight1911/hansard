@@ -114,7 +114,7 @@ function word(_, querystr) {
       const ind = words.indexOf(word)
       console.log(ind)
       console.log("what")
-      words.pop(ind)
+      words.splice(ind, 1)
       console.log(words)
       window.location.href = `./#/word/?${util.dumpuri({ word:words })}`
     }
