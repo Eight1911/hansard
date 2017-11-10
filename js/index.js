@@ -13,6 +13,12 @@ var cssnames = {
 
 var util = function () {
 
+  function contains(list, item) {
+    return list.reduce(function (b, i) {
+      return b || i === item;
+    }, false);
+  }
+
   function getid(id) {
     var element = document.getElementById(id);
     if (!element) throw "no element with id " + id;
@@ -102,9 +108,31 @@ var util = function () {
     return dict;
   }
 
+  function dumpuri(dict) {
+    console.log(dict);
+    var pairs = [];
+    var enc = encodeURIComponent;
+
+    var _loop = function _loop(i) {
+      if (print(dict[i]) instanceof Array) dict[i].forEach(function (obj) {
+        return pairs.push([enc(print(i)) + "[]", enc(obj)]);
+      });else pairs.push([enc(i), enc(dict[i])]);
+    };
+
+    for (var i in dict) {
+      _loop(i);
+    }return pairs.map(function (_ref4) {
+      var _ref5 = _slicedToArray(_ref4, 2),
+          key = _ref5[0],
+          val = _ref5[1];
+
+      return key + "=" + val;
+    }).join("&");
+  }
+
   return {
-    getid: getid, setcss: setcss, clearbody: clearbody, topercent: topercent,
-    max: max, print: print, mean: mean, range: range, scalemax: scalemax, parseuri: parseuri
+    getid: getid, setcss: setcss, clearbody: clearbody, topercent: topercent, contains: contains,
+    max: max, print: print, mean: mean, range: range, scalemax: scalemax, parseuri: parseuri, dumpuri: dumpuri
   };
 }();
 "use strict";
@@ -478,6 +506,9 @@ function topic(_ref, query) {
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+var add_new_word = void 0;
+var sub_old_word = void 0;
+
 function word(_, querystr) {
 
   function buildgraph(body) {
@@ -489,7 +520,7 @@ function word(_, querystr) {
     return main(body);
   }
 
-  function addwords(graph, words) {
+  function createwords(graph, words) {
     var _maindata$range = _slicedToArray(maindata.range, 2),
         start = _maindata$range[0],
         stop = _maindata$range[1];
@@ -508,14 +539,42 @@ function word(_, querystr) {
 
     function main(graph, words) {
       var axis = d2b.chartAxis();
-      var generators = [d2b.svgLine(), d2b.svgScatter()];
+      var line = d2b.svgLine();
+      // line.line().curve(d3.curveBasis)
+      var generators = [line, d2b.svgScatter()];
       var graphs = words.map(grapher);
       var sets = [{ generators: generators, graphs: graphs }];
-      console.log(graphs);
-      return graph.datum({ sets: sets }).call(axis);
+      var chart = graph.datum({ sets: sets });
+      chart.call(axis);
+      window.addEventListener('resize', function () {
+        return chart.call(axis);
+      });
     }
 
     return main(graph, words);
+  }
+
+  function createselection(selword, word) {
+    console.log(word);
+    var catalog = selword.selectAll("div").data(word).enter();
+
+    catalog.append("div").attr("class", "selected-word").attr('onclick', function (d) {
+      return "sub_old_word(\"" + util.print(d) + "\")";
+    }).text(function (d) {
+      return d;
+    });
+  }
+
+  function createhead(selword, words) {
+
+    var allwords = Object.keys(maindata.word);
+    var form = selword.append("form");
+    form.append("datalist").attr("id", "wordlist").selectAll("option").data(allwords).enter().append("option").attr("value", function (d) {
+      return d;
+    });
+
+    form.append("input").attr("id", "input-word").attr("class", "word-search").attr("list", "wordlist").attr("placeholder", "search");
+    form.attr("onsubmit", "add_new_word()");
   }
 
   function main() {
@@ -529,11 +588,32 @@ function word(_, querystr) {
         svg = _buildgraph2[0],
         selword = _buildgraph2[1];
 
-    console.log("Word", words[0], query.word);
+    createhead(selword, words);
+    createselection(selword, words);
+
+    add_new_word = function add_new_word() {
+      event.preventDefault();
+      word = util.getid("input-word").value;
+
+      if (!(word in maindata.word)) return window.alert("word not found");
+      if (util.contains(words, word)) return;
+      words.push(word);
+      window.location.href = "./#/word/?" + util.dumpuri({ word: words });
+    };
+
+    sub_old_word = function sub_old_word(word) {
+      if (!util.contains(words, word)) return;
+      var ind = words.indexOf(word);
+      console.log(ind);
+      console.log("what");
+      words.pop(ind);
+      console.log(words);
+      window.location.href = "./#/word/?" + util.dumpuri({ word: words });
+    };
 
     setTimeout(function () {
-      return addwords(svg, words);
-    }, 100);
+      return createwords(svg, words);
+    }, 0);
   }
 
   return main();

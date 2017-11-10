@@ -1,4 +1,29 @@
 
+input.word-search {
+    width: 100%;
+    padding: 5%;
+    outline: none;
+    border: none;
+    border-bottom: solid medium green;
+    font-family: "open sans";
+    font-size: 100%;
+    display: inline-block;
+}
+
+
+
+
+div.selected-word {
+    width:  70%;
+    overflow: hidden;
+    padding: 5%; 
+    display: inline-block;   
+    cursor: pointer;
+}
+
+div.selected-word:hover {
+    background: pink;
+}
 
 div.word-graph {
     position: absolute;
@@ -8,11 +33,13 @@ div.word-graph {
     height:  70vh;
 }
 
+
+
 div.right {
     position: absolute;
     right: 0vw;
     width: 25vw;
     height:  92vh;
     top:  8vh;
-    border: solid thin;
+    overflow: scroll;
 }

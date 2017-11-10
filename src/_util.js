@@ -12,6 +12,10 @@ const cssnames = {
 
 const util = (() => {
 
+  function contains(list, item) {
+    return list.reduce((b, i) => b || i === item, false)
+  }
+
   function getid(id) {
     const element = document.getElementById(id)
     if (!element)
@@ -100,9 +104,24 @@ const util = (() => {
     return dict
   }
 
+  function dumpuri(dict) {
+    console.log(dict)
+    const pairs = []
+    const enc = encodeURIComponent
+    for (let i in dict)
+      if (print(dict[i]) instanceof Array)
+        dict[i].forEach(obj => pairs.push([ enc(print(i))+"[]", enc(obj) ]))
+      else
+        pairs.push([enc(i), enc(dict[i])])
+    return pairs
+      .map(([key, val]) => `${key}=${val}`)
+      .join("&")
+
+  }
+
   return {
-    getid, setcss, clearbody, topercent,
-    max, print, mean, range, scalemax, parseuri,
+    getid, setcss, clearbody, topercent, contains,
+    max, print, mean, range, scalemax, parseuri, dumpuri,
   }
 
 })()

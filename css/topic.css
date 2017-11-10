@@ -39,7 +39,8 @@ div.left {
 div.middle {
     position: absolute;
     left:  25vw;
-    width:  50vw;
+    width:  68vw;
+    padding: 1vh 1vw;
 }
 
 rect.fore {
@@ -63,13 +64,13 @@ div.topic-doc {
 
 div.doc-name {
     display:  inline-block;
-    width:  23vw;
+    width:  35vw;
     padding: 1vh 1vw;
 }
 
 div.doc-count {
     display:  inline-block;
-    width:  3vw;
+    width:  8vw;
     padding: 1vh 1vw;
     text-align: center;
 }
@@ -84,7 +85,7 @@ div.doc-date {
 
 div.doc-bar {
     padding: 1vw;
-    width:  6.5vw;
+    width:  7.5vw;
     height: 1.3vw;
 }
 
@@ -98,8 +99,8 @@ div.doc-subbar {
 
 div.doc-prop {
     display:  inline-block;
-    width:  4vw;
-    text-align: center;
+    width:  6vw;
+    text-align: right;
 }
 
 div.doc-year, div.doc-hidd-prop {
@@ -119,10 +120,10 @@ div.head div.head-prop {
     cursor: pointer;
 }
 
-div.head div.head-count { width: 5vw; }
+div.head div.head-count { width: 10vw; }
 div.head div.head-date { width: 7.5vw; }
-div.head div.head-name { width: 25vw; }
-div.head div.head-prop { width: 12.5vw; }
+div.head div.head-name { width: 37vw; }
+div.head div.head-prop { width: 13.5vw; }
 
 
 
