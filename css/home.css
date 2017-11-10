@@ -35,7 +35,7 @@ input.search { right: 5.5vh; }
 input.fuzzy-search { right: 33.5vh; }
 
 
-div.row-head { border-bottom: solid medium green; }
+div.row-head { border-bottom: solid medium darkgreen; }
 
 div.row-head-prop,
 div.row-head-id,
@@ -90,7 +90,7 @@ div.topic-row div.topic-bar {
 
 div.topic-bar div.topic-subbar {
   float: right;
-  background: green;
+  background: darkgreen;
   height: 2vw;
 }
 
@@ -99,7 +99,7 @@ div.topic-string {
   display:  none;
 }
 
-div.row-head { border-bottom: solid medium green; }
+div.row-head { border-bottom: solid medium darkgreen; }
 
 div.topic-mean,
 div.topic-subprop { display: none; }
@@ -118,11 +118,11 @@ div.topic-row:hover a {
 
 div.topic-word a:hover {
   background: white;
-  color: green;
+  color: darkgreen;
 }
 
 a div.topic-row:hover {
-  background: green;
+  background: darkgreen;
   color: white;
 }
 
