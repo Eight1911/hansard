@@ -1,0 +1,82 @@
+
+
+.pointer { cursor: pointer; }
+
+html, body {
+    position: fixed;
+    overflow: scroll;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    font-family: georgia;
+    height: auto;
+    height: 100%;
+}
+
+#chart { height: calc(85vh - 10em); }
+.hits { display: none; }
+
+.search:focus ~ .hits,
+.hits:hover {
+    display: block;
+    max-height: calc(85vh - 4em);
+    overflow: scroll;
+
+    background: rgba(255,255,255, 0.8);
+    z-index: -1;
+}
+
+.hit:hover {
+    cursor: pointer;
+    color: black;
+    background: rgba(220, 250, 250, 0.8);
+}
+
+.top {
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.header {
+    top: 0;
+    position: fixed;
+    z-index: 1;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: green;
+}
+
+.hover:hover {
+    cursor: pointer;
+    background: lightgray;   
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.button {
+    background-color: #88ccff;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+.button:hover {
+    background-color: lightblue;
+    border: none;
+    color: white;
+}
+.button:active {
+    background-color: #88ccff;
+    border: none;
+    color: white;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
