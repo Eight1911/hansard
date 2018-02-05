@@ -1,0 +1,92 @@
+
+
+div, section {
+    /*/ border:  solid thin #ddd; /**/
+}
+
+html, body {
+    position: fixed;
+    overflow: scroll;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    font-family: georgia;
+    height: auto;
+    height: 100%;
+}
+
+.top {
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.header {
+    top: 0;
+    position: fixed;
+    z-index: 1;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: green;
+    transition: 0.5s;
+}
+
+.hover:hover {
+    cursor: pointer;
+    background: lightgray;   
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.button {
+    background-color: #88ccff;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+.button:hover {
+    background-color: lightblue;
+    border: none;
+    color: white;
+}
+.button:active {
+    background-color: #88ccff;
+    border: none;
+    color: white;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.ison {
+    background-color: darkgray;
+}
+
+.chart {
+    width: 92vh;
+    height: 92vh;
+    position: absolute;
+    left: 50%;
+    top: 8%;
+    transform: translateX(-50%);
+    padding: 5vh;
+}
+
+.circle {
+    transition: 1s;
+    transform-origin: 50% 50%;
+}
+
+.circle:hover {
+    transition-duration: 0.1s;
+    transform: scale(1.5);
+    cursor: pointer;
+}

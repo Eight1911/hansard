@@ -1,0 +1,24 @@
+<div>
+  <section class="header container-fluid jumbotron m-0 p-3 vertical-align row">
+    <div class="col-8 pl-5">The British Hansard</div>
+    <div 
+      v-for="(method, index) in keys"
+      class="col-1 btn button-secondary p-1 ml-1 mr-1 text-center hover"
+      v-bind:class="index == curr ? 'ison' : ''"
+      v-on:click="app.change(index)">
+      {{ method }}
+    </div>
+  </section>
+
+  <svg class="chart">
+    <a 
+      v-for="(_, i) in data.x"
+      v-bind:href="'../topic/#!/'+i">
+    <circle
+      class="circle hover"
+      v-bind:cx="data.x[i] * 72 + 'vh'"
+      v-bind:cy="data.y[i] * 72 + 'vh'"
+      v-bind:r='5'/>
+    </a>
+  </svg>
+</div>
