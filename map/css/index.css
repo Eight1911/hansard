@@ -82,11 +82,9 @@ a, a:hover {
 
 .circle {
     transition: 1s;
-    transform-origin: 50% 50%;
 }
 
 .circle:hover {
     transition-duration: 0.1s;
-    transform: scale(1.5);
     cursor: pointer;
 }

@@ -11449,7 +11449,7 @@ exports.clearImmediate = clearImmediate;
 /* 7 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <section class=\"header container-fluid jumbotron m-0 p-3 vertical-align row\">\n    <div class=\"col-8 pl-5\">The British Hansard</div>\n    <div \n      v-for=\"(method, index) in keys\"\n      class=\"col-1 btn button-secondary p-1 ml-1 mr-1 text-center hover\"\n      v-bind:class=\"index == curr ? 'ison' : ''\"\n      v-on:click=\"app.change(index)\">\n      {{ method }}\n    </div>\n  </section>\n\n  <svg class=\"chart\">\n    <a \n      v-for=\"(_, i) in data.x\"\n      v-bind:href=\"'../topic/#!/'+i\">\n    <circle\n      class=\"circle hover\"\n      v-bind:cx=\"data.x[i] * 72 + 'vh'\"\n      v-bind:cy=\"data.y[i] * 72 + 'vh'\"\n      v-bind:r='5'/>\n    </a>\n  </svg>\n</div>"
+module.exports = "<div>\n  <section class=\"header container-fluid jumbotron m-0 p-3 vertical-align row\">\n    <div class=\"col-8 pl-5\">The British Hansard</div>\n    <div \n      v-for=\"(method, index) in keys\"\n      class=\"col-1 btn button-secondary p-1 ml-1 mr-1 text-center hover\"\n      v-bind:class=\"index == curr ? 'ison' : ''\"\n      v-on:click=\"app.change(index)\">\n      {{ method }}\n    </div>\n  </section>\n\n  <svg class=\"chart\">\n    <a \n      v-for=\"(_, i) in data.x\"\n      v-bind:xlink:href=\"'../topic/#!/'+i\">\n    <circle\n      class=\"circle hover\"\n      v-bind:cx=\"data.x[i] * 100 + '%'\"\n      v-bind:cy=\"data.y[i] * 100 + '%'\"\n      v-bind:r='6'\n      onmouseover=\"evt.target.setAttribute('r', '9');\"\n      onmouseout=\"evt.target.setAttribute('r', '6');\"/>\n    </a>\n  </svg>\n</div>"
 
 /***/ }),
 /* 8 */

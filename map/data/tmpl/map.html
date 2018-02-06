@@ -13,12 +13,14 @@
   <svg class="chart">
     <a 
       v-for="(_, i) in data.x"
-      v-bind:href="'../topic/#!/'+i">
+      v-bind:xlink:href="'../topic/#!/'+i">
     <circle
       class="circle hover"
-      v-bind:cx="data.x[i] * 72 + 'vh'"
-      v-bind:cy="data.y[i] * 72 + 'vh'"
-      v-bind:r='5'/>
+      v-bind:cx="data.x[i] * 100 + '%'"
+      v-bind:cy="data.y[i] * 100 + '%'"
+      v-bind:r='6'
+      onmouseover="evt.target.setAttribute('r', '9');"
+      onmouseout="evt.target.setAttribute('r', '6');"/>
     </a>
   </svg>
 </div>
