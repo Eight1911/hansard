@@ -38,8 +38,13 @@ html, body {
 }
 
 
-.p-2 {
-    padding: 2%  5%;
+.p-3 {
+    padding: 3%  5%;
+    margin: 0;
+}
+
+.p-1 {
+    padding: 1% 5%;
     margin: 0;
 }
 
@@ -155,7 +160,8 @@ input {
 #chart { height: 60vh; }
 
 .shown {
-    float: right;
+    text-align: left;
+    display: inline-block;
     width: 50%;
     padding: 3% 15%;
     margin: 3% 0;
@@ -167,11 +173,8 @@ input {
 }
 
 .collection {
-    margin: 10vh 0;
-}
-
-.subcollection {
-
+    text-align: right;
+    padding: 12vh 0;
 }
 
 

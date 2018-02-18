@@ -2,7 +2,7 @@
 
   <section 
     class="fixed"
-    style="top: 9%; left: 5%; width: 60%">
+    style="top: 10%; left: 5%; width: 60%">
 
     <section v-if="normalized" style="width: 100%; margin-top: 1%">
       <div class="inline-block" style="width: 70%">
@@ -34,7 +34,7 @@
   
   <section 
     class="fixed pos-right p-0"
-    style="top: 0; width: 25%; max-height: 100%; overflow: scroll;">
+    style="width: 25%; height: 100%; overflow: scroll;">
 
     <section class='collection'>
       <div 
@@ -43,15 +43,14 @@
         v-on:click="app.del(item.text)">
           {{ item.text }}
       </div>
-
     </section>
   </section>
 
   <section class="fixed">
-    <div class="fixed pos-left p-2">
+    <div class="fixed pos-left p-3">
       <a class="no-dec" href="../home">The British Hansard</a>
     </div>
-    <div class="white fixed pos-right p-0 text-right">
+    <div class="white fixed pos-right p-1 text-right">
       <div>
         <input
           type="text"

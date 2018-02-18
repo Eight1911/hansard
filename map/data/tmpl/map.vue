@@ -28,10 +28,10 @@
 
   <section>
 
-    <div class="fixed pos-left p-2">
+    <div class="fixed pos-left p-3">
       <a class="no-dec" href="../home">The British Hansard</a>
     </div>
-    <div class="fixed pos-right p-0 text-right">
+    <div class="fixed pos-right p-1 text-right">
       <div 
         v-for="(method, index) in keys"
         class="inline-block button text-center pointer"
