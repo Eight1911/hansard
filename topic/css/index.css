@@ -1,10 +1,37 @@
 
 
-div, section {
-    /*/ border:  solid thin #ddd; /**/
+.choice > a {
+    color: black;
+    text-decoration: none; 
+}
+.choice > a:hover { 
+    color: lightblue;
 }
 
+div.menu {
+    z-index: 10;
+    position: fixed;
+    right: 3%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.choice { display: none }
+div.menu:hover { height: 100%; }
+div.menu:hover .choice { display: initial; }
+div.menu:hover .header  { display: none; }
+
+
+.vertical-rl {
+    writing-mode: vertical-rl;  
+}
+
+
 .pointer { cursor: pointer; }
+
+.text-center {
+    text-align: center;
+}
 
 html, body {
     position: fixed;
@@ -29,10 +56,6 @@ html, body {
     z-index: 1;
 }
 
-a, a:hover {
-    text-decoration: none;
-    color: green;
-}
 
 .hover:hover {
     cursor: pointer;
@@ -111,4 +134,9 @@ a, a:hover {
     height: 40vh;
     width: 90%;
     padding-top: 3vh;
+}
+
+.no-dec, .no-dec:hover {
+    text-decoration: none;
+    color: black;
 }

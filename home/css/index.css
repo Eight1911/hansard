@@ -1,3 +1,10 @@
+.choice > a {
+    color: black;
+    text-decoration: none; 
+}
+.choice > a:hover { 
+    color: lightblue;
+}
 
 html, body {
     padding: 0 5%;
@@ -7,7 +14,6 @@ html, body {
     font-family: georgia;
 }
 
-.vertical-align {  }
 .background-blue { background-color: gray }
 .h-auto { height: auto; }
 .relative { position: relative; }
@@ -103,4 +109,8 @@ div.subholder:hover .alttext {
 
 .propbar {
     transform: translateY(25%);
+}
+
+@media(max-width: 576px) {
+    .alttext { font-size: 4.5vw; }
 }

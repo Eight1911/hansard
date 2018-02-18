@@ -10,7 +10,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test : /\.html$/,
+        test : /\.vue$/,
         use  : 'raw-loader'
         // use : 'vue-loader'
       }

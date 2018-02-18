@@ -1,6 +1,8 @@
 <div>
   <section class="header container-fluid jumbotron m-0 p-3 vertical-align row">
-    <div class="col-8 pl-5">The British Hansard</div>
+    <div class="col-8 pl-5">
+      <a class="no-dec" href="../home">The British Hansard</a>
+    </div>
     <div class="col-4 pl-5 pr-5 text-right">
         <h4 class="inline"> {{id}} </h4>
     </div>
@@ -79,5 +81,14 @@
       makes up {{ (prop * 100).toFixed(2) }}% of the corpus
     </div>
   </section>
+
+  <div class="menu vertical-rl inline-block text-center"> 
+    <div class="header"> menu </div>
+    <span class="choice">
+      <a href="../home"> home </a> &nbsp; &nbsp;
+      <a href="../map"> embedding </a> &nbsp; &nbsp;
+      <a href="../graph"> graph </a> &nbsp; &nbsp;
+    </span>
+  </div>
 
 </div>

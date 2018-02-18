@@ -338,8 +338,6 @@ class App {
   }
 
   sort() {
-    console.log("sort")
-
     if (this.sortkey)
       this.vue.items.sort((a, b) => b.prop - a.prop)
     else
