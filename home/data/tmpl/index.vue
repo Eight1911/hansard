@@ -17,6 +17,16 @@
     </span>
   </div>
 
+  <div class="sort vertical-rl inline-block text-center"> 
+    <div class="header"> menu </div>
+    <span class="choice">
+      <span onclick="app.sort('prop')"> proportion </span> &nbsp; &nbsp;
+      <span onclick="app.sort('id')"> id </span> &nbsp; &nbsp;
+      <span onclick="app.sort('mean')"> mean year </span> &nbsp; &nbsp;
+    </span>
+  </div>
+
+
 
   <div class="p-5"> </div>
   <div class="text-center container-fluid">

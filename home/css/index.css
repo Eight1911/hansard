@@ -59,10 +59,13 @@ div.sort {
 }
 
 
-.choice { display: none }
-div.menu:hover { height: 100%; }
-div.menu:hover .choice { display: initial; }
-div.menu:hover .header  { display: none; }
+.choice { display: none; cursor: pointer; }
+div.menu:hover,
+div.sort:hover { height: 100%; }
+div.menu:hover .choice,
+div.sort:hover .choice { display: initial; }
+div.menu:hover .header,
+div.sort:hover .header  { display: none; }
 
 .choice > span {
     color: black;
