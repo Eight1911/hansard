@@ -10,7 +10,7 @@
           <circle 
             v-bind:cx="3 + (x * 92) + '%'"
             v-bind:cy="3 + (y * 92) + '%'"
-            v-bind:r='name == currname ? 9*f**0.3 : 5.5*f**0.3'
+            v-bind:r='name == currname ? 9*f**0.33 : 5.5*f**0.33'
             class="pointer"
             v-bind:class="name == currname ? 'currimg' : ''"
             @mouseover="app.setimg(name);">
@@ -42,9 +42,14 @@
     </div>
   </section>
 
+  <div class="disclaimer">
+    *the radius of each topic's circle is proportional to the cube root of its proportion in the corpus
+  </div>
+
   <div class="menu vertical-rl inline-block text-center"> 
     <div class="header"> menu </div>
     <span class="choice">
+      <a href="../front"> front </a> &nbsp; &nbsp;
       <a href="../home"> home </a> &nbsp; &nbsp;
       <a href="../map"> embedding </a> &nbsp; &nbsp;
       <a href="../graph"> graph </a> &nbsp; &nbsp;

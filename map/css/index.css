@@ -9,9 +9,9 @@
 div.menu {
     z-index: 10;
     position: fixed;
-    right: 3%;
+    left: 3%;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) rotate(180deg);
 }
 
 .choice { display: none }
@@ -31,9 +31,7 @@ html, body {
     margin: 0;
     width: 100%;
     font-family: georgia;
-    height: auto;
     height: 100%;
-
     max-width: 100%;
 }
 
@@ -129,9 +127,11 @@ html, body {
 .pl-7 {
     padding-left: 8%;
 }
+
 .pr-7 {
     padding-right: 8%;
 }
+
 circle:hover 
     { transition: 0.1s }
 
@@ -152,4 +152,13 @@ circle.currimg {
 .no-dec, .no-dec:hover {
     text-decoration: none;
     color: black;
+}
+
+.disclaimer {
+    position: fixed;
+    bottom: 3vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 80%;
+    color: #999;
 }

@@ -1,19 +1,29 @@
 
+.border {
+    border: solid thin black;
+}
+
+.no-dec, .no-dec:hover {
+    text-decoration: none;
+    color: black;
+    outline: none;
+}
+
 
 .choice > a {
     color: black;
-    text-decoration: none; 
+    text-decoration: none;
 }
-.choice > a:hover { 
+.choice > a:hover {
     color: lightblue;
 }
 
 div.menu {
     z-index: 10;
     position: fixed;
-    right: 3%;
+    left: 3%;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) rotate(180deg);
 }
 
 .choice { display: none }
@@ -23,14 +33,7 @@ div.menu:hover .header  { display: none; }
 
 
 .vertical-rl {
-    writing-mode: vertical-rl;  
-}
-
-
-.pointer { cursor: pointer; }
-
-.text-center {
-    text-align: center;
+    writing-mode: vertical-rl;
 }
 
 html, body {
@@ -40,103 +43,193 @@ html, body {
     margin: 0;
     width: 100%;
     font-family: georgia;
-    height: auto;
     height: 100%;
+    max-width: 100%;
+}
+
+
+.p-3 {
+    padding: 3vw  5vw;
+}
+
+.p-2 {
+    padding: 2vw 5vw;
+}
+
+.p-1 {
+    padding: 1vw 5vw;
+}
+
+
+
+.pos-right {
+    right: 0;
+}
+
+.pos-left {
+    left: 0;
 }
 
 .top {
     top: 0;
-    right: 0;
-    left: 0;
 }
 
-.header {
-    top: 0;
-    position: fixed;
-    z-index: 1;
+.text-center {
+    text-align: center;
 }
 
-
-.hover:hover {
-    cursor: pointer;
-    background: lightgray;   
+.text-right {
+    text-align: right;
 }
 
-.vertical-align {
-    display: flex;
-    align-items: center;
-    vertical-align: middle;
+.text-left {
+    text-align: left;
 }
 
-.button {
-    background-color: #88ccff;
-    border: none;
-    outline: none;
-    color: white;
+.inline-block {
+    display: inline-block;
 }
 
-.button:hover {
-    background-color: lightblue;
-    border: none;
-    color: white;
-}
-.button:active {
-    background-color: #88ccff;
-    border: none;
-    color: white;
-}
-
-.btn:hover {
+.pointer {
     cursor: pointer;
 }
 
-.prop-subbar {
-    background-color: #88ccff;
-}
 
-.prop-bar {
-    background-color: #eee;
-    bottom: 0;
+.fixed {
     position: fixed;
 }
 
-.wordprop-subbar {
+.absolute {
     position: absolute;
-    background-color: #88ccff;
 }
 
-.docprop-subbar {
-    position: absolute;
-    background-color: #88ccff;
-}
-
-.prop-text {
-    z-index: 3
+.relative {
+    position: relative;
 }
 
 .scroll {
     overflow: scroll;
 }
 
-.headtitle {
-    border-bottom: solid medium black;
+.h-100 {
+    height: 100%;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.lightblue {
+    background: lightblue;
+}
+
+.lightgray {
+    background: #f6f6f6;
+}
+
+.button {
+    font-family: Georgia;
+    font-size: 100%;
+    padding: 1vw 2vw;
+    border-radius: 0.5em 0.5em;
+    border: solid thin lightblue;
+}
+
+.button:hover {
+    border: solid thin lightblue;
+    background: lightblue;
+}
+.button:active {
+    border: solid thin lightgray;
+}
+
+a.button {
+    display: block;
+}
+
+
+
+.flex-column {
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+}
+
+.flex-column .pad-top {
+  flex: 0 1 calc(5vw + 1.5em);
+  min-height: calc(5vw + 1.5em);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.flex-column .holder {
+  flex: 1 1 auto;
+}
+
+.flex-column .footer {
+  flex: 0 1 auto;
+  background: #f6f6f6;
+}
+
+.prop-bar {
+    float: left;
+    padding: 0;
+    margin: 0;
+    background: lightblue;
+}
+
+.prop-text {
+    position: relative;
+    width: 90vw;
+    padding: 0.5vw 5vw;
 }
 
 .holder {
-    width: 95%;
-    position: absolute;
-    transform: translateX(-50%);
-    left: 50%;
+    padding: 0vh 5vw 0vh 7vw;
+    position: relative;
+    width: 88%;
+}
+
+.word {
+    margin: 0.8vh 0;
+    background: #f6f6f6;
+    font-size: 85%;
+}
+
+.w-text  {
+    position: relative;
+    padding: 0.6vh 1vw;
+    width: 20vw;
+}
+
+.w-prop {
+    float: right;
+    padding: 0.6vh 1vw;
+}
+
+.flex-column .chart {
+  flex: 0 1 auto;
+}
+
+.flex-column .docs {
+  flex: 1 1 auto;
 }
 
 
-#chart {
-    height: 40vh;
-    width: 90%;
-    padding-top: 3vh;
+
+
+.doc {
+    font-size: 85%;
 }
 
-.no-dec, .no-dec:hover {
-    text-decoration: none;
-    color: black;
+table { border-spacing: 0 0.8vh; }
+
+/* must sum to 63vw which 
+   is the width of the container */
+.d-date { width: 11vw; } 
+.d-name { width: 35vw; }
+.d-token { width: 6vw; }
+/* .d-count { width: 20%; } */
+.d-text {
+    width: 11vw;
+    padding: 0.6vh 1vw;
 }

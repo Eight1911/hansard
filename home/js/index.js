@@ -293,6 +293,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
 class App {
 
   constructor() {
@@ -300,9 +301,13 @@ class App {
     function loadapp(self) {
       const tmpl = __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].compile(__webpack_require__(7))
       const length = 100
-      const data = { items : self.items, app : self }
-
-
+      const data = {
+        items : self.items,
+        shown : new Set(self.items.map(i => i.id)),
+        app   : self,
+        query : "",
+        sort  : "prop"
+      }
       const options = {
         el              : '#mainapp',
         data            : data,
@@ -314,41 +319,69 @@ class App {
 
     function makeitems(self) {
       const items = []
-      const data = self.data = __webpack_require__(8)
+      const data = __webpack_require__(8)
       const max = Math.max(...data.map(d => d.prop))
       let total = 0
       for (const d of data)
         total += d.prop
       return data.map(item => ({
-        id : item.id, 
+        id : item.id,
         prop : item.prop / total,
-        width : item.prop / max
-      })).sort( (a, b) => b.prop - a.prop )
+        width : item.prop / max,
+        word : item.word,
+        mean : item.mean
+      })).sort((a, b) => b.prop - a.prop)
     }
 
     function main(self) {
-      self.items = makeitems(self)
+      self.temp = { sortkey: "prop", asc:false, query:'' }
+      self.data = makeitems(self)
+      self.items = self.data.map(i => i)
+      self.ids = self.data.map(i => i.id)
       self.vue = loadapp(self)
-      self.sortkey = false
-
       setTimeout(() => self.lazy = new __WEBPACK_IMPORTED_MODULE_1_lazyload___default.a(), 100)
     }
 
     return main(this)
   }
 
-  sort() {
-    if (this.sortkey)
-      this.vue.items.sort((a, b) => b.prop - a.prop)
-    else
-      this.vue.items.sort((a, b) => a.id - b.id)
-    this.sortkey = !this.sortkey
+  reload() {
     setTimeout(() => this.lazy.loadImages(), 100)
   }
 
+  _sort(key, asc) {
+    this.temp.asc = asc
+    this.temp.sortkey = key
+    this.vue.items.sort((a, b) => b[key] - a[key])
+    if (asc)
+      this.vue.items.reverse()
+  }
+
+  _search(word) {
+    this.temp.query = word.toLowerCase()
+    word = word.toLowerCase()
+    const shown = this.vue.items
+      .filter(i => i.word.some(w => w.includes(word)))
+      .map(i => i.id)
+    this.vue.shown = new Set(shown)
+  }
+
+  sort(key) {
+    const asc = this.temp.sortkey === key
+      ? !this.temp.asc
+      : true
+    console.log(key, asc)
+    this._sort(key, asc)
+    this.reload()
+  }
+
+  search(word) {
+    this._search(word)
+    this.reload()
+  }
 }
 
-const app = new App()
+const app = window.app = new App()
 
 
 /***/ }),
@@ -11604,7 +11637,7 @@ exports.clearImmediate = clearImmediate;
 /* 7 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <div class=\"title\" @click=\"app.sort()\"> Hansard </div>\n\n  <div class=\"menu vertical-rl inline-block text-center\"> \n    <div class=\"header\"> menu </div>\n    <span class=\"choice\">\n      <a href=\"./\"> home </a> &nbsp; &bull; &nbsp;\n      <a href=\"../map\"> embedding </a> &nbsp; &bull; &nbsp;\n      <a href=\"../graph\"> graph </a>\n    </span>\n  </div>\n\n  <div class=\"p-5\"> </div>\n  <div class=\"text-center container-fluid\">\n    <div class=\"row\">\n      <div v-for=\"item in items\" class=\"col-12 col-sm-4 holder p-0\">\n          <div class=\"subholder\">\n          <a v-bind:href=\"`../topic/#!/${item.id}`\">\n            <img\n              v-bind:data-src=\"`./data/img/${item.id}.png`\"\n              class=\"object-contain cloud lazyload\">  \n            </img>\n            <div class=\"alttext text-center object-contain p-3\"> \n              <div>{{ item.id }} </div>\n              <img \n                class=\"trend m-3 lazyload\"\n                src=\"./data/graph/placeholder.png\"\n                v-bind:data-src=\"`./data/graph/graph-${item.id}.png`\">  \n              </img>\n              <br>\n              <div style=\"relative\">\n                <div\n                  class=\"inline-block p-0 text-left\"\n                  style=\"width:30%\">\n                  {{ Math.round(item.prop * 10000) / 100 }} %\n                </div>\n                <div\n                  class=\"inline-block relative p-0 propbar\"\n                  style=\"width:50%;\">\n                  <div\n                    class=\"block p-0 background-blue h-100 right\" \n                    v-bind:style=\"{ width: item.width * 100 + '%'}\">\n                    &nbsp;\n                  </div>\n                </div>\n              </div>\n            </div>\n          </a>\n        </div>\n      </div>\n\n    </div>\n  </div>\n\n\n</div>"
+module.exports = "<div>\n  <div class=\"title\"> Hansard </div>\n  <input \n    class=\"search\" \n    placeholder=\"search\" \n    v-model=\"query\"\n    @input=\"app.search(query)\"\n    @change=\"app.search(query)\"/>\n\n  <div class=\"menu vertical-rl inline-block text-center\"> \n    <div class=\"header\"> menu </div>\n    <span class=\"choice\">\n      <a href=\"../front\"> front </a> &nbsp; &nbsp;\n      <a href=\"../home\"> home </a> &nbsp; &nbsp;\n      <a href=\"../map\"> embedding </a> &nbsp; &nbsp;\n      <a href=\"../graph\"> graph </a> &nbsp; &nbsp;\n    </span>\n  </div>\n\n\n  <div class=\"p-5\"> </div>\n  <div class=\"text-center container-fluid\">\n    <div class=\"row\">\n      <div \n        v-for=\"item in items\" \n        class=\"col-12 col-sm-4 holder p-0\"\n        v-bind:style=\"{ 'display' : shown.has(item.id) ? 'initial' : 'none' } \">\n          <div class=\"subholder\">\n          <a v-bind:href=\"`../topic/#!/${item.id}`\">\n            <img\n              v-bind:data-src=\"`./data/img/${item.id}.png`\"\n              class=\"object-contain cloud lazyload\">  \n            </img>\n            <div class=\"alttext text-center object-contain p-3\"> \n              <div>{{ item.id }} </div>\n              <img \n                class=\"trend m-3 lazyload\"\n                src=\"./data/graph/placeholder.png\"\n                v-bind:data-src=\"`./data/graph/graph-${item.id}.png`\">  \n              </img>\n              <br>\n              <div style=\"relative\">\n                <div\n                  class=\"inline-block p-0 text-left\"\n                  style=\"width:30%\">\n                  {{ Math.round(item.prop * 10000) / 100 }} %\n                </div>\n                <div\n                  class=\"inline-block relative p-0 propbar\"\n                  style=\"width:50%;\">\n                  <div\n                    class=\"block p-0 background-blue h-100 right\" \n                    v-bind:style=\"{ width: item.width * 100 + '%'}\">\n                    &nbsp;\n                  </div>\n                </div>\n              </div>\n            </div>\n          </a>\n        </div>\n      </div>\n\n    </div>\n  </div>\n\n\n</div>"
 
 /***/ }),
 /* 8 */

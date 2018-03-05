@@ -1,19 +1,30 @@
 <div>
-  <div class="title" @click="app.sort()"> Hansard </div>
+  <div class="title"> Hansard </div>
+  <input 
+    class="search" 
+    placeholder="search" 
+    v-model="query"
+    @input="app.search(query)"
+    @change="app.search(query)"/>
 
   <div class="menu vertical-rl inline-block text-center"> 
     <div class="header"> menu </div>
     <span class="choice">
-      <a href="./"> home </a> &nbsp; &bull; &nbsp;
-      <a href="../map"> embedding </a> &nbsp; &bull; &nbsp;
-      <a href="../graph"> graph </a>
+      <a href="../front"> front </a> &nbsp; &nbsp;
+      <a href="../home"> home </a> &nbsp; &nbsp;
+      <a href="../map"> embedding </a> &nbsp; &nbsp;
+      <a href="../graph"> graph </a> &nbsp; &nbsp;
     </span>
   </div>
+
 
   <div class="p-5"> </div>
   <div class="text-center container-fluid">
     <div class="row">
-      <div v-for="item in items" class="col-12 col-sm-4 holder p-0">
+      <div 
+        v-for="item in items" 
+        class="col-12 col-sm-4 holder p-0"
+        v-bind:style="{ 'display' : shown.has(item.id) ? 'initial' : 'none' } ">
           <div class="subholder">
           <a v-bind:href="`../topic/#!/${item.id}`">
             <img

@@ -1,94 +1,94 @@
 <div>
-  <section class="header container-fluid jumbotron m-0 p-3 vertical-align row">
-    <div class="col-8 pl-5">
-      <a class="no-dec" href="../home">The British Hansard</a>
-    </div>
-    <div class="col-4 pl-5 pr-5 text-right">
-        <h4 class="inline"> {{id}} </h4>
-    </div>
-  </section>
-
-  <br><br><br>
-
-  <section class="holder"> 
-    <section class="row w-100 h-100">
-      <section class="col-3 pl-5">
-        
-        <div class="row p-0">
-          <div class="headtitle col-5 pt-2 pb-2 text-left">
-            <b>word</b>
-          </div><div class="headtitle col-7 pt-2 pb-2 text-center">
-            <b>proportion</b>
-          </div>
-        </div>
-
-        <div style="height: calc(100vh - 9em)" class="scroll row">
-          <div class="col-12 row" v-for="w in word">
-            <div class="col-5 pl-3 pt-1 pb-1"><small>{{ w.word }}</small></div>
-            <div class="col-4 p-0 pt-1 pb-1">
-              <div 
-                class="wordprop-subbar p-0"
-                v-bind:style="{ width: w.width * 100 + '%' }">
-                &nbsp;
-              </div>
-            </div>
-            <div class="col-3 text-right p-0">
-              <small>{{ (w.prop * 100).toFixed(2) + '%' }}</small>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      <section class="col-9">
-        <div id="chart"></div>
-        <br>
-        <div class="row p-0 col-12">
-          <div class="headtitle col-2 pt-1 pb-2 text-right"><b>date</b></div>
-          <div class="headtitle col-5 pt-1 pb-2 text-left"><b>name</b></div>
-          <div class="headtitle col-2 pt-1 pb-2 text-left"><b>tokens</b></div>
-          <div class="headtitle col-3 pt-1 pb-2 text-center"><b>topic words</b></div>
-        </div>
-
-        <div  style="height: calc(60vh - 10.3em)" class="scroll row p-0">
-          <div class="row col-12 pt-1 pb-1" v-for="document in doc">
-            <div class="col-2 text-right"> {{ document.date }}</div>
-            <div class="col-5 text-left"> {{ document.name.toLowerCase() }} </div>
-            <div class="col-2 text-left">  {{ document.token }}</div>
-            <div class="col-3 text-center row p-0">
-              <div class="col-9 p-0 h-8">
-                <div 
-                  class="docprop-subbar p-0 text-right"
-                  v-bind:style="{ width: document.count / maxdoc * 100 + '%' }">
-                  &nbsp;
-                </div>
-              </div>
-              <div class="col-3 p-0 text-right"> {{ document.count }} </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </section>
-  </section>
-
-
-  <section class="prop-bar container-fluid m-0 p-0 vertical-align text-center row">
-    <div 
-      class="prop-subbar position-absolute d-block m-0 pt-1 pb-1"
-      v-bind:style="{ width: 100*width + '%'}">&nbsp;
-    </div>
-    <div class="prop-text p-1 pl-5">
-      makes up {{ (prop * 100).toFixed(2) }}% of the corpus
-    </div>
-  </section>
 
   <div class="menu vertical-rl inline-block text-center"> 
     <div class="header"> menu </div>
     <span class="choice">
+      <a href="../front"> front </a> &nbsp; &nbsp;
       <a href="../home"> home </a> &nbsp; &nbsp;
       <a href="../map"> embedding </a> &nbsp; &nbsp;
       <a href="../graph"> graph </a> &nbsp; &nbsp;
     </span>
   </div>
 
+
+  <section class="flex-column">
+    <section class="pad-top"></section>
+    <section class="holder">
+      <div class="absolute scroll h-100" style="width:20vw">
+        <div class="word relative" v-for="w in word">
+          <a class="no-dec" v-bind:href="`/graph/?#!/?words[]=${w.word}`" target="__blank">
+            <div class="w-prop">{{ (w.prop * 100).toFixed(2) + '%' }}</div>
+            <div class="lightblue w-bar" v-bind:style="{ width: w.width * 100 + '%'}">
+              <div class="w-text">{{ w.word }}</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <section class="absolute scroll h-100" style="right:7vw; width:63vw">
+        <div class="flex-column" style="height:inherit">
+          <div class="chart"><div id="chart"></div><br></div>
+          <div class="docs relative">
+
+            <div class="absolute scroll h-100 w-100">
+
+              <table>
+
+                <tr class="doc relative">
+                  <th class="d-date text-center"> date </th>
+                  <th class="d-name text-left"> name </th>
+                  <th class="d-token text-center"> # tokens </th>
+                  <th class="d-count text-left">
+                    <div class="d-bar" style="width: 100%">
+                    <div class="d-bar" style="width: 0%">
+                      <div class="d-text"> # topic tokens </div>
+                    </div>
+                    </div>
+                  </th>
+                </tr>
+
+                <tr class="doc relative" v-for="d in doc">
+                  <td class="d-date text-center"> {{ d.date }} </td>
+                  <td class="d-name"> {{ d.name }} </td>
+                  <td class="d-token text-center"> {{ d.token }} </td>
+                  <td class="d-count text-left"> 
+                    <div class="lightgray d-bar" style="width: 100%">
+                    <div class="lightblue d-bar" v-bind:style="{ width: d.count / maxdoc * 100 + '%' }">
+                      <div class="d-text">{{ d.count }}</div>
+                    </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </section>
+
+
+    <section class="footer">
+      <div class="prop-bar" v-bind:style="{ width: 100*width + '%'}">
+        <div class="prop-text">
+          makes up {{ (prop * 100).toFixed(2) }}% of the corpus
+        </div>
+      </div>
+    </section>
+  </section>
+
+
+  <div class="fixed pos-left top p-3">
+    <a class="no-dec" href="../home">The British Hansard</a>
+  </div>
+  <div class="fixed pos-right top p-2">
+    <a class='button no-dec pointer text-center'
+       target="__blank"
+       v-bind:href='`../graph/#!/?` + word
+        .slice(0, 6)
+        .map(w=>`words[]=`+w.word)
+        .join("&")'>
+      word graph for #{{ id }}
+    </a>
+  </div>
 </div>

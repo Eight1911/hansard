@@ -1,5 +1,7 @@
 <div>
-  <section class="container card mt-3 mb-3 fluid-container">
+  <section 
+    class="container card mt-3 mb-3 fluid-container"
+    style="margin-left: 7vw; margin-right: 7vw; width: 86vw">
     <div class="row small text-center" role="group">
       <div class="pointer row-header col-1 pt-2 pb-2" v-on:click="app.sort('id')"> id </div>
       <div class="pointer row-header col-2 pt-2 pb-2" v-on:click="app.sort('mean')"> overtime </div>
@@ -10,7 +12,8 @@
 
   <section
     v-for="topic in topics"
-    class="container card pointer mt-4 mb-4">
+    class="container card pointer mt-4 mb-4"
+    style="margin-left: 7vw; margin-right: 7vw; width: 86vw">
 
     <section class="row vertical-align topic-row">
       <a
@@ -70,4 +73,14 @@
       @keypress="app.search()">
     </div>
   </section>
+
+  <div class="menu vertical-rl inline-block text-center"> 
+    <div class="header"> menu </div>
+    <span class="choice">
+      <a href="../front"> front </a> &nbsp; &nbsp;
+      <a href="../home"> home </a> &nbsp; &nbsp;
+      <a href="../map"> embedding </a> &nbsp; &nbsp;
+      <a href="../graph"> graph </a> &nbsp; &nbsp;
+    </span>
+  </div>
 </div>

@@ -9,9 +9,9 @@
 div.menu {
     z-index: 10;
     position: fixed;
-    right: 3%;
+    left: 3%;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) rotate(180deg);
 }
 
 .choice { display: none }

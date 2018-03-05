@@ -79,6 +79,7 @@
   <div class="menu vertical-rl inline-block text-center"> 
     <div class="header"> menu </div>
     <span class="choice">
+      <a href="../front"> front </a> &nbsp; &nbsp;
       <a href="../home"> home </a> &nbsp; &nbsp;
       <a href="../map"> embedding </a> &nbsp; &nbsp;
       <a href="../graph"> graph </a> &nbsp; &nbsp;
