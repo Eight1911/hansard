@@ -16,7 +16,7 @@
     <section class="holder">
       <div class="absolute scroll h-100" style="width:20vw">
         <div class="word relative" v-for="w in word">
-          <a class="no-dec" v-bind:href="`./graph/?#!/?words[]=${w.word}`" target="__blank">
+          <a class="no-dec" v-bind:href="`./hansard/graph/?#!/?words[]=${w.word}`" target="__blank">
             <div class="w-prop">{{ (w.prop * 100).toFixed(2) + '%' }}</div>
             <div class="lightblue w-bar" v-bind:style="{ width: w.width * 100 + '%'}">
               <div class="w-text">{{ w.word }}</div>
